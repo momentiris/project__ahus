@@ -1,24 +1,50 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-import styled from 'styled-components';
+import { Header, Ul, Li, SLink, Div, Nav } from './styles.js';
 
-import { S_header, S_Link } from './styles.js';
+class HeaderComponent extends React.Component {
+  constructor() {
+    super();
+
+    this.nav = {
+      '/': {
+        color: 'DodgerBlue',
+        isActive: true,
+      },
+      '/felanmalan': {
+        color: 'Orange',
+        isActive: false,
+      }
+    }
+  }
+
+  toggleNavColor = (target) => {
+    this.setState({
+      color: this.nav[target].color
+    })
+  }
+
+  componentWillMount() {
+    this.setState({
+      color: this.nav[this.props.location.pathname].color
+    })
+  }
+
+  render() {
+    return (
+      <Header>
+        <Div color={this.state.color}/>
+        <Nav>
+          <Ul>
+            <Li color="DodgerBlue" onClick={() => this.toggleNavColor('/')}><SLink to='/'>Hem</SLink></Li>
+            <Li color="Orange" onClick={() => this.toggleNavColor('/felanmalan') }><SLink to='/felanmalan'>Felanmälan</SLink></Li>
+          </Ul>
+        </Nav>
+      </Header>
+    )
+  }
+}
 
 
-// The Header creates links that can be used to navigate
-// between routes.
-const Header = () => (
-  <S_header>
-    <nav>
-      <ul>
-        <li><S_Link to='/'>Home</S_Link></li>
-        <li><S_Link to='/roster'>Roster</S_Link></li>
-        <li><S_Link to='/schedule'>Schedule</S_Link></li>
-      </ul>
-    </nav>
-  </S_header>
-)
 
-
-export default Header
+export default HeaderComponent;
