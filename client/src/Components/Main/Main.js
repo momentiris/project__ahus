@@ -1,16 +1,19 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Home from '../Home/Home'
-import FelanmalanComponent from '../Felanmalan/Felanmalan';
+import HomeComponent from '../Home/Home'
+import IssueContainer from '../IssueContainer/IssueContainer';
+
+import { SMain } from './styles';
+
 
 const routes = {
-  '/': Home,
-  '/felanmalan': FelanmalanComponent
+  '/': HomeComponent,
+  '/felanmalan': IssueContainer
 }
 
 const Main = () => (
 
-  <main>
+  <SMain className="main__wrap">
     <Switch>
       {
         Object.entries(routes).map(([path, name]) => {
@@ -20,7 +23,7 @@ const Main = () => (
         })
       }
     </Switch>
-  </main>
+  </SMain>
 )
 
 export default Main

@@ -2,41 +2,26 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 import { breakpoints } from '../../../project/styled/helpers'
 
-export const Header = styled.header`
+import { colors } from '../../../project/stylesheet.js';
 
-`;
 
 export const Ul = styled.ul`
-  position: relative;
+  margin: 0 4rem 0 0;
   padding: 0;
-  left: 10%;
-  margin: 0;
   display: flex;
-  & > li:nth-child(2) {
-    transform: translateX(-2px)
-  }
-  & > li:nth-child(1) {
-
-  }
+  height: 65px;
+  align-items: center;
+  min-width: 350px;
+  justify-content: space-between
+  position: relative;
 `
 export const Li = styled.li`
-  cursor: pointer;
   list-style: none;
-  width: 200px;
-  height: 40px;
-  background: ${props => props.color}
-  border-radius: 0px 0px 37px 37px / 0px 0px 73px 72px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 0;
-  &:focus {
-    z-index: 1
-  }
+  font-size: 22px;
 `;
 
 export const SLink = styled(Link)`
-
+  color: white;
   text-decoration: none;
     &:hover {
       color: white;
@@ -44,19 +29,22 @@ export const SLink = styled(Link)`
 `;
 
 export const Nav = styled.nav`
-  position: relative;
-
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  background: ${props => props.color}
+  transition: background .4s ease;
 `
 
-export const Div = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  background: ${props => props.color}
+export const Underscore = styled.span`
+  height: 1px;
+  width: ${props => props.width};
+  transition:  .4s ease 0.2s
+  position: absolute;
+  bottom: 33.5%;
+  right: ${props => props.navHome ? '49.5%' : ' 0%'}
 
-  border-bottom-left-radius: 50px 50px;
-  border-bottom-right-radius: 50px 50px;
+  background: white;
+  z-index: 10;
 
 `

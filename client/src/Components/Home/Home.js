@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const Home = () => (
-  <div>
-    <h1>Welcome to the Tornadoes Website!</h1>
-  </div>
-)
+import { AsideIntroBlock, HomeWrapper, SliderSection } from './styles';
+import ContentSlider from '../ContentSlider/ContentSlider';
 
-export default Home
+class HomeComponent extends Component {
+
+  render() {
+    return (
+      <HomeWrapper className="home__wrapper">
+        <AsideIntroBlock className="aside__introblock" color={'grey'}/>
+
+        <ContentSlider>
+        </ContentSlider>
+
+      </HomeWrapper>
+    )
+  }
+}
+
+export default HomeComponent

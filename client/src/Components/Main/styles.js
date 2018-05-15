@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-const Adde = styled.main`
-  background: pink;
-  height: 100vh;
-  width: 100vw;
+export const SMain = styled.main`
+width: 100%
+height: 100%;
+background: grey;
+
+
 `
-export default Adde;
