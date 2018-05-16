@@ -39,7 +39,7 @@ export const Nav = styled.nav`
 export const Underscore = styled.span`
   height: 1px;
   width: ${props => props.width};
-  transition:  .4s ease 0.2s
+  transition:  .3s ease
   position: absolute;
   bottom: 33.5%;
   right: ${props => props.navHome ? '49.5%' : ' 0%'}

@@ -4,8 +4,6 @@ import { Ul, Li, SLink, Nav, Underscore } from './styles.js';
 
 import { colors } from '../../../project/stylesheet.js'
 
-
-
 class HeaderComponent extends React.Component {
   constructor() {
     super();
@@ -29,9 +27,7 @@ class HeaderComponent extends React.Component {
       color: this.nav[target].color,
     })
     this.toggleUnderscore(e);
-
   }
-
 
   componentWillMount() {
     this.setState({
@@ -41,7 +37,6 @@ class HeaderComponent extends React.Component {
   }
 
   toggleUnderscore() {
-    
     this.setState({
       navHome: !this.state.navHome
     })
@@ -53,16 +48,14 @@ class HeaderComponent extends React.Component {
     return (
       <header className="header">
         <Nav color={this.state.color} className="navigation">
-
           <Ul>
             <Li innerRef={this.nav1}>
               <SLink to='/' onClick={() => {this.toggleNavColor('/')}}>Aktuellt på Campus</SLink>
             </Li>
-            <Li innerRef={this.nav2}><SLink to='/felanmalan' onClick={() => this.toggleNavColor('/felanmalan') }>Felanmälan</SLink></Li>
-            {
-
+            <Li innerRef={this.nav2}>
+              <SLink to='/felanmalan' onClick={() => this.toggleNavColor('/felanmalan') }>Felanmälan</SLink>
+            </Li>
             <Underscore navHome={this.state.navHome ? true : false} width={this.state.navHome ? '176px' : '104px'}></Underscore>
-            }
           </Ul>
         </Nav>
       </header>

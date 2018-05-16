@@ -1,17 +1,25 @@
 import styled from 'styled-components';
 
-export const SlideWrap = styled.div`
-  width: 600px;
-  height: 85%;
+
+export const Card = styled.article`
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  height: auto
+  flex-grow: 2;
+  margin: 0;
+  transition: 0.2s ease;
+  align-items: center;
   display: flex;
-  flex-flow: row wrap;
-  border: 1px solid black;
+  justify-content: center;
+  border-radius: 20px;
+  background: grey;
+
 `
 
-export const NewsItem = styled.article`
-  width: 300px;
-  height: 200px;
-  margin: 2rem;
-  background: grey;
+export const Box = styled.div`
+  width: 400px;
+  height: 100vw;
+
 
 `
