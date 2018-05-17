@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HomeProvider from '../Contexts/HomeContext';
 
 import Main from '../Components/Main/Main';
 import Header from '../Components/partials/Header/Header'
@@ -12,10 +13,12 @@ import '../project/style__base.js'
 class App extends Component {
   render() {
     return (
-      <Div>
-        <Header></Header>
-        <Main>hej</Main>
-      </Div>
+      <HomeProvider>
+        <React.Fragment>
+          <Header></Header>
+          <Main>hej</Main>
+        </React.Fragment>
+      </HomeProvider>
     );
   }
 }

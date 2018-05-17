@@ -46,5 +46,4 @@ export const Underscore = styled.span`
 
   background: white;
   z-index: 10;
-
 `

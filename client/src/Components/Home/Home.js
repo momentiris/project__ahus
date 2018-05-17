@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-
-import { AsideIntroBlock, HomeWrapper, H2,Div, SortPostWrap } from './styles';
+import { injectGlobal } from 'styled-components';
+import { AsideIntroBlock, HomeWrapper, SortPostWrap, Logotype } from './styles';
 import ContentSlider from '../ContentSlider/ContentSlider';
 import FlowSortContainer from '../FlowSort/FlowSortContainer';
+
+import logo from './logotype/Obs_Aside.svg';
 
 class HomeComponent extends Component {
   constructor() {
@@ -11,26 +13,20 @@ class HomeComponent extends Component {
       introBlockActive: false,
     }
   }
+
   toggleBlock(arg) {
-    if (arg) {
-      this.setState({
-        introBlockActive: true,
-      })
-    }
-    else {
-      this.setState({
-        introBlockActive: false,
-      })
-    }
+    this.setState({
+      introBlockActive: arg ? true : false
+    })
   }
 
   render() {
     return (
       <HomeWrapper className="home__wrapper">
-        <AsideIntroBlock className="aside__introblock" color={'grey'} isBlockActive={this.state.introBlockActive} />
-        <Div className="home__header__text">
-          <H2>Aktuellt på ditt campus.</H2>
-        </Div>
+        <Logotype src={logo} className="logotype" isBlockActive={this.state.introBlockActive} />
+        <AsideIntroBlock className="aside__introblock" color={'grey'} isBlockActive={this.state.introBlockActive}>
+        </AsideIntroBlock>
+
         <FlowSortContainer></FlowSortContainer>
         <ContentSlider toggleBlock={this.toggleBlock.bind(this)} isBlockActive={this.state.introBlockActive}>
         </ContentSlider>

@@ -1,48 +1,44 @@
 import React, { Component } from 'react';
-import Swiper from 'react-id-swiper';
-import { SlideWrap, Card } from './styles';
+import { ScrollContainer, Card, ContentWrap, NewsImage } from './styles';
+import { HomeContext } from '../../Contexts/HomeContext';
 
 class ContentSlider extends Component {
 	constructor(props) {
 		super(props);
+		this.scrollContainer = React.createRef();
+	}
 
+	scroll = (e) => {
+		this.scrollContainer.current.scrollLeft > 20 ?
+		this.props.toggleBlock(true) :
+		this.props.toggleBlock(false);
+		e.preventDefault()
+
+		this.scrollContainer.current.scrollLeft += e.deltaY * 0.25;
 	}
-	temp(e){
-		e > 0.01 ?
-		 this.props.toggleBlock(true) :
-		 this.props.toggleBlock(false)
-	}
-	
+
   render() {
-    const params = {
-      ContainerEl: 'section',
-      slideClass: 'hej',
-      lazy: true,
-      slidesPerView: 2,
-  		slidesPerColumn: 2,
-  		spaceBetween: 20,
-  		freeMode: true,
-  		mousewheel: true,
-      containerClass: 'customized-swiper-container',
-			on: {
-				progress: this.temp.bind(this)
-			}
-   }
-
    return (
+		 <HomeContext.Consumer>
+		 	{(context) => (
+			<ScrollContainer onWheel={this.scroll} innerRef={this.scrollContainer} className="scrollcontainer">
+				<div>
+			    <Card color="white" width="400px">Slide 2</Card>
+			    <Card color="white" width="400px">Slide 3</Card>
+			    <Card color="white" width="400px">Slide 4</Card>
+			    <Card color="white" width="400px">Slide 5</Card>
+				</div>
+				<div>
+			    <Card color="white" width="500px">Slide 2</Card>
+			    <Card color="white" width="500px">Slide 3</Card>
+			    <Card color="white" width="500px">Slide 4</Card>
+			    <Card color="white" width="500px">Slide 5</Card>
+				</div>
 
-     <Swiper {...params} >
-       <Card>Slide 1</Card>
-       <Card>Slide 2</Card>
-       <Card>Slide 3</Card>
-       <Card>Slide 4</Card>
-       <Card>Slide 5</Card>
-       <Card>Slide 6</Card>
-       <Card>Slide 7</Card>
-       <Card>Slide 8</Card>
-       <Card>Slide 9</Card>
-       <Card>Slide 10</Card>
-     </Swiper>
+			</ScrollContainer>
+
+	 )}
+ </HomeContext.Consumer>
 
    )
   }

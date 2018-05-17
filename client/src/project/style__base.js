@@ -10,6 +10,6 @@ injectGlobal`
   body {
     margin: 0;
     height: 100vh;
-
+    overflow-x: hidden;
   }
 `;

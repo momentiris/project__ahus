@@ -6,7 +6,7 @@ import { colors } from '../../project/stylesheet';
 
 const Wrap = styled.div`
   margin-left: 22.5rem;
-  padding: .5rem 1rem 1rem 1rem;
+  padding: 2.5rem 1rem 1rem 1rem;
   display: flex;
   align-items: center;
   flex-flow: row nowrap;
