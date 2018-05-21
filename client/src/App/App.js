@@ -4,18 +4,24 @@ import HomeProvider from '../Contexts/HomeContext';
 import Main from '../Components/Main/Main';
 import Header from '../Components/partials/Header/Header'
 import Footer from '../Components/partials/Footer/Footer'
-import { Route } from 'react-router-dom'
+import {withRouter} from 'react-router'
 
 import { Div } from './styles'
 
 import '../project/style__base.js'
 
 class App extends Component {
+  constructor(props) {
+    super();
+  }
   render() {
     return (
       <HomeProvider>
         <React.Fragment>
-          <Header></Header>
+          {
+            this.props.location.pathname != '/' && <Header></Header>
+          }
+
           <Main>hej</Main>
         </React.Fragment>
       </HomeProvider>
@@ -24,4 +30,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default withRouter(App);

@@ -14,7 +14,7 @@ const Button = styled.div`
 `
 
 const SortButton = (props) => (
-  <Button color={props.color}className="sort__button"> {props.name}</Button>
+  <Button onClick={props.sortFeed} color={props.color} className="sort__button"> {props.name}</Button>
 )
 
 export default SortButton;

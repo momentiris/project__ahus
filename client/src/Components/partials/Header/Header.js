@@ -15,7 +15,7 @@ class HeaderComponent extends Component {
     this.nav2 = React.createRef();
 
     this.nav = {
-      '/': {
+      '/hem': {
         color: colors.purple,
         isActive: true,
       },
@@ -40,25 +40,30 @@ class HeaderComponent extends Component {
   }
 
   componentWillMount() {
-    this.setState({
-      color: this.nav[this.props.location.pathname].color,
-      navHome: this.props.location.pathname == '/' ? true : false,
-    })
+    if (this.props.location.pathname != '/') {
+      this.setState({
+        color: this.nav[this.props.location.pathname] ?
+        this.nav[this.props.location.pathname].color :
+        colors.purple,
+        navHome: this.props.location.pathname == '/hem' ? true : false,
+      })
+
+    }
   }
 
   render() {
     const { match, location, history } = this.props;
 
-    return (
 
+    return (
       <HomeContext.Consumer>
         {(context) => (
           <header className="header">
             <Nav color={this.state.color} className="navigation">
-              
+
               <Ul>
                 <Li innerRef={this.nav1}>
-                  <SLink to='/' onClick={() => {this.toggleNavColor('/')}}>Aktuellt på Campus</SLink>
+                  <SLink to='/hem' onClick={() => {this.toggleNavColor('/hem')}}>Aktuellt på Campus</SLink>
                 </Li>
                 <Li innerRef={this.nav2}>
                   <SLink to='/felanmalan' onClick={() => this.toggleNavColor('/felanmalan') }>Felanmälan</SLink>
@@ -72,6 +77,7 @@ class HeaderComponent extends Component {
 
     )
   }
+
 }
 
 

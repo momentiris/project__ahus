@@ -11,23 +11,27 @@ const Wrap = styled.div`
   align-items: center;
   flex-flow: row nowrap;
 `
-const h4 = styled.h4`
 
-`
-class FlowSort extends Component {
+class FlowSortContainer extends Component {
+  constructor(props) {
+    super();
+    console.log(props);
+
+  }
+
 
   render() {
     return (
       <Wrap>
         <h4>Sortera Nyhetsflöde:</h4>
-        <SortButton name="Visa Alla" color={colors.purple} />
-        <SortButton name="Driftinfo" color={colors.orange} />
-        <SortButton name="Nyheter" color={colors.lightgrey} />
-        <SortButton name="EventKalendern" color={colors.green} />
+        <SortButton sortFeed={() => this.props.sortFeed('all')} name="Visa Alla" color={colors.purple} />
+        <SortButton sortFeed={() => this.props.sortFeed('drift')} name="Driftinfo" color={colors.yellow} />
+        <SortButton sortFeed={() => this.props.sortFeed('news')} name="Nyheter" color={colors.lightgrey} />
+        <SortButton sortFeed={() => this.props.sortFeed('event')} name="EventKalendern" color={colors.green} />
       </Wrap>
     );
   }
 
 }
 
-export default FlowSort;
+export default FlowSortContainer;
