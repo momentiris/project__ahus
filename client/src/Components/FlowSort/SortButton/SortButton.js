@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Button = styled.div`
   height: 40px;
-  padding: 1rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
   background: ${props => props.color};
   margin-left: 2rem;
   border-radius: 20px;
@@ -11,10 +11,14 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color:${props => props.name === 'Nyheter' || props.name === 'Driftinfo' ? 'black' : 'white'}
 `
 
 const SortButton = (props) => (
-  <Button onClick={props.sortFeed} color={props.color} className="sort__button"> {props.name}</Button>
+  <Button name={props.name} onClick={props.sortFeed} color={props.color} className="sort__button" style={{
+      fontFamily: 'OpensansBold',
+
+    }}> {props.name}</Button>
 )
 
 export default SortButton;

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
-import { injectGlobal } from 'styled-components';
-import posed from 'react-pose';
+import posed, {PoseGroup} from 'react-pose';
+import {MainCont} from '../Main/styles';
+import { HomeContext } from '../../Contexts/HomeContext';
+
 
 import { AsideIntroBlock, HomeWrapper, SortPostWrap, Logotype } from './styles';
 import ContentSlider from '../ContentSlider/ContentSlider';
@@ -28,7 +30,7 @@ class HomeComponent extends Component {
     await setTimeout(() => this.setState({
       news: [...entries],
       allnews: [...entries],
-    }), 250)
+    }), 1000)
   }
 
   getNewsByType = async (type) => {
@@ -55,50 +57,45 @@ class HomeComponent extends Component {
   }
 
   sortFeed = async _type => {
-
-    // _type === 'all' ?
-    // await this.setState({news: this.state.allnews}) :
-    // await this.setState({news: this.state.news.filter((item,i) => _type === item.type)});
     await this.setState({type: _type})
-
-
   }
+
 
   render() {
     return (
 
-      <HomeWrapper className="home__wrapper">
-        <Logotype src={logo} className="logotype" isBlockActive={this.state.introBlockActive} />
+      <HomeContext.Consumer>
+  		 	{(context) => (
+        <HomeWrapper className="home__wrapper">
+          <AsideIntroBlock
+            className="aside__introblock"
+            color={'grey'}
+            isBlockActive={context.state.isScrolled}>
+          </AsideIntroBlock>
 
-        <AsideIntroBlock
-          className="aside__introblock"
-          color={'grey'}
-          isBlockActive={this.state.introBlockActive}>
-        </AsideIntroBlock>
-
-        <FlowSortContainer
-          sortFeed={this.sortFeed.bind(this)}
-          isOpen={this.state.isOpen}
-          news={this.state.news}
-          getAllNews={this.getAllNews.bind(this)}
-          getNewsByType={this.getNewsByType}>
-        </FlowSortContainer>
-
-        {
-          this.state.news.length > 0 ? (
-
-          <ContentSlider
-            type={this.state.type}
-            toggleContent={this.toggleContent.bind(this)}
+          <FlowSortContainer
+            sortFeed={this.sortFeed.bind(this)}
             isOpen={this.state.isOpen}
-            toggleBlock={this.toggleBlock.bind(this)}
-            isBlockActive={this.state.introBlockActive}
-            news={this.state.news}>
-          </ContentSlider>
-        ) : <Loader></Loader>
-        }
+            news={this.state.news}
+            getAllNews={this.getAllNews.bind(this)}
+            getNewsByType={this.getNewsByType}>
+          </FlowSortContainer>
+          {
+            this.state.news.length > 0 ? (
+            <ContentSlider
+              type={this.state.type}
+              toggleContent={this.toggleContent.bind(this)}
+              isOpen={this.state.isOpen}
+              toggleBlock={this.toggleBlock.bind(this)}
+              isBlockActive={this.state.introBlockActive}
+              news={this.state.news}>
+            </ContentSlider>
+          ) : <Loader></Loader>
+          }
+        </HomeWrapper>
+      )}
+    </HomeContext.Consumer>
 
-      </HomeWrapper>
     )
   }
 }

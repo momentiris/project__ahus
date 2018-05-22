@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import { colors } from '../../project/stylesheet';
+import asideImg from '../../project/assets/Aside_image.png';
 
 export const HomeWrapper = styled.section`
 	height: 100%;
 	overflow-x: hidden;
 
 `
-export const AsideIntroBlock = styled.div`
+export const AsideIntroBlock = styled.section`
 	height: 100vh;
 	width: 20%
 	min-width: 350px;
-	background: ${colors.grey};
+	background: center / cover no-repeat url(${asideImg});
 	position: absolute;
 	top: 0;
-	transition: .3s ease ;
+	transition: .3s ease;
 	${props => props.isBlockActive ? 'transform: translateX(-100%); opacity: 0' : 'opacity: 1'}
 `
 

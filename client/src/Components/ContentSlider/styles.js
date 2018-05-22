@@ -25,7 +25,7 @@ const itemProps = {
   enter: {
     opacity: 1,
     x: 0,
-    delay: 500,
+    delay: 300,
     transition: (props) => tween({
     ...props,
     duration: 200,
@@ -37,7 +37,7 @@ const itemProps = {
     x: 100,
     transition: (props) => tween({
     ...props,
-   duration: 300,
+   duration: 200,
    ease: easing.ease
  }) },
 
@@ -53,7 +53,7 @@ export const Card = styled(Item)`
   width: auto;
   display: inline-flex;
   background: ${props => props.color};
-  height: 200px;
+  height: 240px;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
@@ -93,11 +93,11 @@ export const ScrollContainer = styled.section`
   width: 100%;
   overflow-x: scroll;
   white-space: nowrap;
-  padding: 1rem 0rem 1rem 23.25rem;
+  padding: 0rem 0rem 1rem 23.25rem;
   display: flex;
   flex-flow: column nowrap;
 
-  height: 475px;
+
 
 
   ::-webkit-scrollbar {

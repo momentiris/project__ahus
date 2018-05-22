@@ -12,7 +12,7 @@ class HomeProvider extends Component {
     return (
       <HomeContext.Provider value={{
           state: this.state,
-          toggleIsScrolled: () => this.setState({ isScrolled: !this.state.isScrolled }),
+          toggleIsScrolled: (arg) => this.setState({ isScrolled: arg}),
         }}>
         {this.props.children}
       </HomeContext.Provider>

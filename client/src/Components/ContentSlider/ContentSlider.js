@@ -9,17 +9,18 @@ class ContentSlider extends Component {
 		this.scrollContainer = React.createRef();
 	}
 
-	scroll = (e) => {
-		this.scrollContainer.current.scrollLeft > 20 ?
-		this.props.toggleBlock(true) :
-		this.props.toggleBlock(false);
+	scroll = (e, context) => {
+
 		e.preventDefault()
+		this.scrollContainer.current.scrollLeft > 20 ?
+		context.toggleIsScrolled(true) :
+		context.toggleIsScrolled(false)
 
 		this.scrollContainer.current.scrollLeft += e.deltaY * 0.25;
 	}
 
 	async componentDidMount() {
-		 await setTimeout(this.props.toggleContent, 500);
+		 await setTimeout(this.props.toggleContent, 300);
 	}
 
 	async componentWillUnmount() {
@@ -30,8 +31,8 @@ class ContentSlider extends Component {
    return (
 		<HomeContext.Consumer>
 		 	{(context) => (
-				<ScrollContainer onWheel={this.scroll} innerRef={this.scrollContainer} className="scrollcontainer">
-					<Container className="sidebar" pose={this.props.isOpen ? 'enter' : 'exit'}>
+				<ScrollContainer onWheel={(e) => this.scroll(e, context)} innerRef={this.scrollContainer} className="scrollcontainer">
+					<Container withParent={false} className="sidebar" pose={this.props.isOpen ? 'enter' : 'exit'}>
 						<PoseGroup>
 						{
 							this.props.type != 'all' && this.props.news.map((item, i) => {
@@ -66,7 +67,7 @@ class ContentSlider extends Component {
 					</PoseGroup>
 
 				</Container>
-					<Container className="sidebar" pose={this.props.isOpen ? 'enter' : 'exit'}>
+					<Container withParent={false} className="sidebar" pose={this.props.isOpen ? 'enter' : 'exit'}>
 						<PoseGroup>
 						{
 							this.props.type == 'all' && this.props.news.map((item, i) => {

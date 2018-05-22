@@ -11,21 +11,20 @@ export const Ul = styled.ul`
   display: flex;
   height: 65px;
   align-items: center;
-  min-width: 350px;
+  min-width: 375px;
   justify-content: space-between
   position: relative;
 `
 export const Li = styled.li`
   list-style: none;
-  font-size: 22px;
+
 `;
 
 export const SLink = styled(Link)`
   color: white;
+	font-family: 'Chronicle';
+  letter-spacing: 0.5px;
   text-decoration: none;
-    &:hover {
-      color: white;
-    }
 `;
 
 export const Nav = styled.nav`
@@ -37,13 +36,12 @@ export const Nav = styled.nav`
 `
 
 export const Underscore = styled.span`
-  height: 1px;
+  height: 2px;
   width: ${props => props.width};
   transition:  .3s ease
   position: absolute;
-  bottom: 33.5%;
-  right: ${props => props.navHome ? '49.5%' : ' 0%'}
-
+  bottom: 23.5%;
+  ${props => props.navHome ? 'left: -1%;' : ' left: 67%'}
   background: white;
   z-index: 10;
 `

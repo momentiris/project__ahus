@@ -1,7 +1,8 @@
 /* global google */
-import React from 'react';
+import React   from 'react';
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+
 
 const { MarkerWithLabel } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
 const myMarkerSVG = './image.svg';
@@ -28,7 +29,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => (
   >
   {
     props.isMarkerShown && markers && Object.entries(markers).map(([i, inst]) => (
-      <Marker animation={google.maps.Animation.BOUNCE} key={i} position={{ lat: inst.lat, lng: inst.lng }} />
+      <Marker animation={google.maps.Animation.DROP} key={i} position={{ lat: inst.lat, lng: inst.lng }} />
     ))
   }
 

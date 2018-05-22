@@ -8,12 +8,16 @@ import {withRouter} from 'react-router'
 
 import { Div } from './styles'
 
-import '../project/style__base.js'
-
 class App extends Component {
   constructor(props) {
     super();
   }
+
+  componentDidMount() {
+
+
+  }
+
   render() {
     return (
       <HomeProvider>
@@ -22,7 +26,7 @@ class App extends Component {
             this.props.location.pathname != '/' && <Header></Header>
           }
 
-          <Main>hej</Main>
+          <Main></Main>
         </React.Fragment>
       </HomeProvider>
     );
