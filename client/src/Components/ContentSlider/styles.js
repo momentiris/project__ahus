@@ -53,7 +53,7 @@ export const Card = styled(Item)`
   width: auto;
   display: inline-flex;
   background: ${props => props.color};
-  height: 240px;
+  height: 210px;
   border-radius: 15px;
   align-items: center;
   justify-content: center;

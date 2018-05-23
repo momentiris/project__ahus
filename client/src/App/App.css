@@ -1,0 +1,22 @@
+
+    @font-face {
+      font-family: 'Chronicle';
+      src: url('./ChronicleDeckCond-Semibold.otf') format('opentype');
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'OpensansBold';
+      src: url('./opensans-bold-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'OpensansReg';
+      src: url('./opensans-regular-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+  

@@ -38,10 +38,11 @@ export const Nav = styled.nav`
 export const Underscore = styled.span`
   height: 2px;
   width: ${props => props.width};
-  transition:  .3s ease
+  transition: .3s ease
   position: absolute;
   bottom: 23.5%;
-  ${props => props.navHome ? 'left: -1%;' : ' left: 67%'}
+  transform: translateX(${props => props.navHome ? '0px' : '250px'});
+
   background: white;
   z-index: 10;
 `

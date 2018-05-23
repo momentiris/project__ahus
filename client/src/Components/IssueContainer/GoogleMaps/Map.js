@@ -1,10 +1,12 @@
 /* global google */
 import React from 'react';
 
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, OverlayView } from "react-google-maps";
+import { InfoBoxInner } from './Infobox';
+import logotype from '../../../project/assets/custompointblue.svg';
 
 const { MarkerWithLabel } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
-const myMarkerSVG = './image.svg';
+const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
 
 const markers = {
   1: {
@@ -28,10 +30,31 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => (
     defaultCenter={{ lat: 59.34814839999999, lng: 18.02365789999999 }}
   >
   {
-    props.isMarkerShown && markers && Object.entries(markers).map(([i, inst]) => (
-      <Marker animation={google.maps.Animation.BOUNCE} key={i} position={{ lat: inst.lat, lng: inst.lng }} />
-    ))
+    props.isMarkerShown &&
+    <OverlayView
+      position={{ lat: 59.34715288600296, lng: 18.02260647406615 }}
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+    >
+    <Marker className="custom__marker"
+        position={{ lat: 59.34715288600296, lng: 18.02260647406615 }}
+        icon={logotype}
+        optimized={false}
+        animation={google.maps.Animation.DROP}
+      >
+        <InfoBox
+          onCloseClick={props.onToggleOpen}
+          options={{ closeBoxURL: ``, enableEventPropagation: true, alignBottom: true, pixelOffset: new google.maps.Size(-5, -25), }}
+        >
+          <InfoBoxInner load={props.load} title={'Fel på toaletten'} area={'Data & Informationsteknik'} adress={'Chalmers Tvärg. 6'} />
+        </InfoBox>
+      </Marker>
+
+    </OverlayView>
   }
+
+
+
+
 
   </GoogleMap>
 )

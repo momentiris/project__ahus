@@ -7,6 +7,7 @@ export const Section = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
+  z-index: -2
 
 `
 
@@ -19,14 +20,17 @@ export const IssueWrap = styled.section`
 `
 
 export const MapnavButton = styled.div`
+  cursor: pointer;
   width: 175px;
   height: 60px;
-  background: ${props => props.color};
-
+  background: ${props => props.bg};
   position: relative;
-  z-index: 10;
   border-radius: 0px 0px 15px 15px;
-  transform: translateY(${props => props.isActive ? '0' : '-100%'});
-  transition: transform .2s ease-in-out .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 150ms ease-in-out 1s;
+  color: ${props => props.color};
+
 
 `

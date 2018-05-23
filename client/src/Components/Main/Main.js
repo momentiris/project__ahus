@@ -16,9 +16,9 @@ const Main = ({location}) => (
                 >
                   <section className="route-section">
                       <Switch location={location}>
-                        <Route  exact path={'/'} component={CampusSelector}/>
+                        <Route exact path={'/'} component={CampusSelector}/>
                         <Route path={'/hem'} render={props => <HomeComponent serverEndpoint={'http://localhost:1337'} />} />
-                        <Route  path={'/felanmalan'} component={IssueContainer}/>
+                        <Route path={'/felanmalan'} component={IssueContainer}/>
                       </Switch>
                   </section>
                 </CSSTransition>

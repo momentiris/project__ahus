@@ -1,7 +1,5 @@
 import styled, {injectGlobal} from 'styled-components';
-import Chronicle from './assets/ChronicleDeckCond-Semibold.otf';
-import OpensansBold from './assets/OpenSans-Bold.otf';
-import OpensansReg from './assets/OpenSans-Regular.otf';
+
 
 injectGlobal`
 

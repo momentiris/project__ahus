@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import posed, {PoseGroup} from 'react-pose';
 import {MainCont} from '../Main/styles';
 import { HomeContext } from '../../Contexts/HomeContext';
+import { colors } from '../../project/stylesheet'
 
-
-import { AsideIntroBlock, HomeWrapper, SortPostWrap, Logotype } from './styles';
+import { AsideIntroBlock, HomeWrapper, SortPostWrap, Logotype, ReportButton, ContactBox } from './styles';
 import ContentSlider from '../ContentSlider/ContentSlider';
 import FlowSortContainer from '../FlowSort/FlowSortContainer';
 
@@ -31,13 +31,6 @@ class HomeComponent extends Component {
       news: [...entries],
       allnews: [...entries],
     }), 1000)
-  }
-
-  getNewsByType = async (type) => {
-      const news = await RequestService.getRequestByType(`${this.props.serverEndpoint}/news/${type}`);
-      await this.setState({
-        news: [...news],
-      })
   }
 
    componentWillMount() {
@@ -71,6 +64,18 @@ class HomeComponent extends Component {
             className="aside__introblock"
             color={'grey'}
             isBlockActive={context.state.isScrolled}>
+              <h3 style={{
+                  color: 'white',
+
+                }}>Välkommen till <br/> Campus Johanneberg</h3>
+              <ReportButton className="reportbutton"color={colors.red}>Rapportera ett fel </ReportButton>
+              <ContactBox color={colors.lightgrey}>
+                <h5>Kontaktperson - Akademiska hus</h5>
+                <p>Jan Henningsson</p>
+                <p>Projektledare</p>
+                <p>031-632554</p>
+                <p>jan.henningsson@akademiskahus.se</p>
+              </ContactBox>
           </AsideIntroBlock>
 
           <FlowSortContainer
@@ -78,7 +83,7 @@ class HomeComponent extends Component {
             isOpen={this.state.isOpen}
             news={this.state.news}
             getAllNews={this.getAllNews.bind(this)}
-            getNewsByType={this.getNewsByType}>
+            >
           </FlowSortContainer>
           {
             this.state.news.length > 0 ? (
