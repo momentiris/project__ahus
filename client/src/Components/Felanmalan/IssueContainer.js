@@ -63,6 +63,8 @@ class IssueContainer extends React.Component {
 	 					  mapElement={<div style={{ height: `100%` }} />}
 	 					/>
 					}
+
+
 			</Section>
 		</IssueWrap>
 		);
