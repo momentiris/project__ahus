@@ -14,7 +14,7 @@ import { css } from 'styled-components';
    tablet: 768,
    phone: 400
  }
- 
+
 export const breakpoints = Object.keys(sizes).reduce((accumulator, label) => {
 
 	const size = sizes[label];

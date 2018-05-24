@@ -24,6 +24,10 @@ injectGlobal`
     h3 {
       font-size: 20px;
     }
+		h5 {
+			font-family: 'OpensansBold';
+			font-size: 15px;
+		}
     h4 {
       font-size: 15px;
     }
@@ -44,7 +48,7 @@ injectGlobal`
       font-size: 32px;
     }
     h3 {
-      font-family: 'Chronicle';
+      font-family: 'OpensansBold';
       letter-spacing: .4px;
       font-size: 24px;
     }

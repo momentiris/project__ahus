@@ -2,12 +2,17 @@ import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 import HomeComponent from '../Home/Home';
 import CampusSelector from '../CampusSelector/CampusSelector';
-import IssueContainer from '../IssueContainer/IssueContainer';
+import Felanmalan from '../Felanmalan/Felanmalan';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { HomeContext } from '../../Contexts/HomeContext';
+
 
 import Styles from './styles.css';
 
-const Main = ({location}) => (
+
+
+
+const Main = ({location}, props) => (
             <TransitionGroup className="transition-group">
                 <CSSTransition
                     key={location.key}
@@ -15,11 +20,15 @@ const Main = ({location}) => (
                     classNames="slide"
                 >
                   <section className="route-section">
+                    <HomeContext.Consumer>
+                      {(context) => (
                       <Switch location={location}>
                         <Route exact path={'/'} component={CampusSelector}/>
                         <Route path={'/hem'} render={props => <HomeComponent serverEndpoint={'http://localhost:1337'} />} />
-                        <Route path={'/felanmalan'} component={IssueContainer}/>
+                        <Route path={'/felanmalan'} render={props => <Felanmalan context={context} serverEndpoint={'http://localhost:1337'} />}/>
                       </Switch>
+                    )}
+                    </HomeContext.Consumer>
                   </section>
                 </CSSTransition>
             </TransitionGroup>

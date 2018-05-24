@@ -20,6 +20,7 @@ import styled from 'styled-components';
 class HeaderComponent extends Component {
   constructor(props) {
     super();
+    console.log(props);
 
     this.nav1 = React.createRef();
     this.nav2 = React.createRef();
@@ -66,7 +67,9 @@ class HeaderComponent extends Component {
 
     return (
       <HomeContext.Consumer>
+
         {(context) => (
+
           <header className="header">
             <Logotype src={logo} className="logotype" isBlockActive={context.state.isScrolled} />
             <Nav color={location.pathname === '/hem' ? colors.purple : colors.red} className="navigation">

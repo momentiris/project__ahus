@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {colors} from '../../project/stylesheet';
 
 export const Section = styled.div`
   width: 100%;
@@ -7,8 +8,6 @@ export const Section = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: -2
-
 `
 
 export const IssueWrap = styled.section`
@@ -16,7 +15,6 @@ export const IssueWrap = styled.section`
   height: 101%;
   position: relative;
   display: flex;
-
 `
 
 export const MapnavButton = styled.div`
@@ -29,8 +27,22 @@ export const MapnavButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 150ms ease-in-out 1s;
-  color: ${props => props.color};
+  transition: color 150ms ease 150ms;
+  color: ${props => props.isClicked === props.type ? 'white' : colors.red};
+	z-index: 100;
+  margin-right: .5rem;
+  &:before {
+    content: '';
+    width: 100%;
+    z-index: -1;
+    background: ${props => colors.lightgrey};
+    position: absolute;
+    border-radius: 0px 0px 15px 15px;
+    bottom: 0;
+    height: ${props => props.isClicked === props.type ? '0%' : '100%'};
+    transition: height 150ms ease 150ms;
+  }
+
 
 
 `
