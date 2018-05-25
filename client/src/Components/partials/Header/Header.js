@@ -20,8 +20,6 @@ import styled from 'styled-components';
 class HeaderComponent extends Component {
   constructor(props) {
     super();
-    console.log(props);
-
     this.nav1 = React.createRef();
     this.nav2 = React.createRef();
 
@@ -77,13 +75,11 @@ class HeaderComponent extends Component {
               <Ul>
                 <Li innerRef={this.nav1}>
                   <SLink to='/hem' className="navlink" onClick={() => {
-
                       context.toggleIsScrolled(false)
                     }}>Aktuellt på Campus</SLink>
                 </Li>
                 <Li innerRef={this.nav2}>
                   <SLink to='/felanmalan/map' className="navlink" onClick={() => {
-
                       context.toggleIsScrolled(true)}
                     }>Felanmälaren</SLink>
                 </Li>

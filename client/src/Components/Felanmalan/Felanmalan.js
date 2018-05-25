@@ -7,13 +7,16 @@ import { HomeContext } from '../../Contexts/HomeContext';
 class Felanmalan extends Component {
 	constructor(props) {
 		super();
-		console.log(props);
+
 
 		this.state = {
 			hasIssues: false,
 			issues: [],
-			...props.context
+			location: props.location,
+			...props.context,
+
 		}
+		console.log(this.state);
 	}
 
 	getAllIssues = async () => {
@@ -36,7 +39,7 @@ class Felanmalan extends Component {
 			<React.Fragment>
 			{
 				this.state.hasIssues ?
-					<IssueContainer issues={this.state.issues}></IssueContainer> :
+					<IssueContainer location={this.state.location} issues={this.state.issues}></IssueContainer> :
 						<div>loading...</div>
 			}
 			</React.Fragment>

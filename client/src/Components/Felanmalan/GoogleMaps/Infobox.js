@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { colors } from '../../../project/stylesheet';
+
 
 const Pointy = styled.div`
 	width: 0;
@@ -19,8 +21,9 @@ const CustomInfoBox = styled.div`
 	padding: 1rem;
 	border-radius: 10px;
 	font-family: 'Chronicle';
-	box-shadow: 3px 3px 5px grey;
+	box-shadow: 3px 3px 5px ${colors.lightgrey};
 	margin: 0rem .5rem 0rem 0;
+
 `
 
 export const InfoBoxInner = (props) => (

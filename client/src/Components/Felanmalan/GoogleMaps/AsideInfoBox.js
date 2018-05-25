@@ -6,7 +6,7 @@ import { getTimeString } from '../../../project/helpers';
  const StyledAsideInfoBox = styled.section`
 	width: 250px;
 	min-height: 300px;
-	background: ${colors.lightgrey};
+	background: white;
 	position: absolute;
 	z-index: 100;
 	border-radius: 15px;
@@ -17,6 +17,7 @@ import { getTimeString } from '../../../project/helpers';
 	transform: translateX(${props => props.isActive ? '0%' : '-115%'});
   display: flex;
   flex-flow: column nowrap;
+  box-shadow: 3px 3px 5px ${colors.lightgrey};
 
   overflow-y: scroll;
 `

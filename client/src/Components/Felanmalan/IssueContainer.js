@@ -3,6 +3,7 @@ import MapComponent from './GoogleMaps/Map';
 import AsideInfoBox from './GoogleMaps/AsideInfoBox';
 import { Section, IssueWrap, MapnavButton} from './styles.js'
 import {colors} from '../../project/stylesheet';
+import ActiveSectionComponent from './ActiveSectionComponent/ActiveSectionComponent';
 
 class IssueContainer extends React.Component {
 	constructor(props) {
@@ -16,7 +17,7 @@ class IssueContainer extends React.Component {
 			currentIssue: [],
 			btnState: 'map'
 		}
-
+		console.log(this.state);
 	}
 
 	componentDidMount() {
@@ -26,8 +27,6 @@ class IssueContainer extends React.Component {
 		}), 500)
 	}
 
-
-
 	toggleAsideInfoBox = async (issue) => {
 		await this.setState({
 			asideActive: true,
@@ -35,8 +34,8 @@ class IssueContainer extends React.Component {
 		})
 
 	}
-	toggleButtons = arg => {
-		this.setState({
+	toggleButtons = async arg => {
+		await this.setState({
 			btnState: arg,
 			view: arg
 		})
@@ -45,13 +44,15 @@ class IssueContainer extends React.Component {
 	render() {
 		return (
 			<IssueWrap>
-				<MapnavButton  bg={colors.red} switchColor={colors.lightgrey} color={'white'} isClicked={this.state.btnState} type="map" isActive={this.state.loaded} onClick={() => this.toggleButtons('map')}><h5>Kartvy</h5></MapnavButton>
-				<MapnavButton  bg={colors.red} switchColor={colors.red} color={colors.red} isClicked={this.state.btnState} type="active" isActive={this.state.loaded} onClick={() => this.toggleButtons('active')}><h5>Pågående</h5></MapnavButton>
-				<MapnavButton  bg={colors.red} switchColor={colors.red} color={colors.red} isClicked={this.state.btnState} type="finished" isActive={this.state.loaded} onClick={() => this.toggleButtons('finished')}><h5>Avslutade</h5></MapnavButton>
+				<MapnavButton bg={colors.red} switchColor={colors.lightgrey} color={'white'} isClicked={this.state.btnState} type="map" isActive={this.state.loaded} onClick={() => this.toggleButtons('map')}><h5>Kartvy</h5></MapnavButton>
+				<MapnavButton bg={colors.red} switchColor={colors.red} color={colors.red} isClicked={this.state.btnState} type="active" isActive={this.state.loaded} onClick={() => this.toggleButtons('active')}><h5>Pågående</h5></MapnavButton>
+				<MapnavButton bg={colors.red} switchColor={colors.red} color={colors.red} isClicked={this.state.btnState} type="finished" isActive={this.state.loaded} onClick={() => this.toggleButtons('finished')}><h5>Avslutade</h5></MapnavButton>
 				<Section>
-					<AsideInfoBox currentIssue={this.state.currentIssue} isActive={this.state.asideActive}></AsideInfoBox>
+
 					{
 						this.state.view === 'map' &&
+						<React.Fragment>
+						<AsideInfoBox currentIssue={this.state.currentIssue} isActive={this.state.asideActive}></AsideInfoBox>
 						<MapComponent
 							issues={this.state.issues}
 							load={this.state.loaded}
@@ -62,6 +63,13 @@ class IssueContainer extends React.Component {
 	 					  containerElement={<div style={{ width: `100%`, height: `100%` }} />}
 	 					  mapElement={<div style={{ height: `100%` }} />}
 	 					/>
+					</React.Fragment>
+					}
+
+					{
+						this.state.view === 'active' &&
+						<ActiveSectionComponent issues={this.state.issues}>
+						</ActiveSectionComponent>
 					}
 
 

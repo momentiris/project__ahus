@@ -25,7 +25,7 @@ const Main = ({location}, props) => (
                       <Switch location={location}>
                         <Route exact path={'/'} component={CampusSelector}/>
                         <Route path={'/hem'} render={props => <HomeComponent serverEndpoint={'http://localhost:1337'} />} />
-                        <Route path={'/felanmalan'} render={props => <Felanmalan context={context} serverEndpoint={'http://localhost:1337'} />}/>
+                        <Route path={'/felanmalan'} render={props => <Felanmalan context={context} location={location} serverEndpoint={'http://localhost:1337'} />}/>
                       </Switch>
                     )}
                     </HomeContext.Consumer>

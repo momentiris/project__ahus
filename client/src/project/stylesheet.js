@@ -11,6 +11,7 @@ injectGlobal`
   @media (max-width: 768px) {
     h1, h2 {
       font-family: 'Chronicle';
+      font-weight: normal;
     }
     h1 {
       font-size: 50px;
@@ -20,6 +21,7 @@ injectGlobal`
     }
     h3, h4 {
       font-family: 'OpensansBold';
+      font-weight: normal;
     }
     h3 {
       font-size: 20px;
@@ -27,6 +29,7 @@ injectGlobal`
 		h5 {
 			font-family: 'OpensansBold';
 			font-size: 15px;
+      font-weight: normal;
 		}
     h4 {
       font-size: 15px;
@@ -40,6 +43,7 @@ injectGlobal`
     h1, h2 {
       font-family: 'Chronicle';
       letter-spacing: 0.5px;
+      font-weight: normal;
     }
     h1 {
       font-size: 48px;
@@ -51,10 +55,12 @@ injectGlobal`
       font-family: 'OpensansBold';
       letter-spacing: .4px;
       font-size: 24px;
+      font-weight: normal;
     }
 
     h4, h5 {
       font-family: 'OpensansBold';
+      font-weight: normal;
     }
     h4 {
       font-size: 20px;
@@ -82,7 +88,7 @@ injectGlobal`
 `;
 
 export const colors = {
-  lightgrey: '#E9EFE9',
+  lightgrey: '#E7EDF0',
   grey: '#ADADAD',
 	purple: '#59539B',
 	orange: '#EE7F00',

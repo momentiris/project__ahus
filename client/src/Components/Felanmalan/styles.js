@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {colors} from '../../project/stylesheet';
+import {Link} from 'react-router-dom';
 
 export const Section = styled.div`
   width: 100%;
@@ -20,7 +21,7 @@ export const IssueWrap = styled.section`
 export const MapnavButton = styled.div`
   cursor: pointer;
   width: 175px;
-  height: 60px;
+  height: 45px;
   background: ${props => props.bg};
   position: relative;
   border-radius: 0px 0px 15px 15px;
