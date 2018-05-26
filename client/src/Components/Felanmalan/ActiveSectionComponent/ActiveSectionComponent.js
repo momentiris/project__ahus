@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Wrapper, IssueUl, IssueLi, AsideSort, IssueListWrap, SuperSpan } from './styles';
+import { Wrapper, IssueUl, IssueLi, AsideSort, IssueListWrap, SuperSpan, ExpandIssueContainer } from './styles';
 
 class ActiveSectionComponent extends Component {
 	 constructor(props) {
@@ -10,6 +10,15 @@ class ActiveSectionComponent extends Component {
 		 }
 
 	 }
+
+	 toggleExpandIssue = async i => {
+
+		 await this.setState({
+			 issueActive: this.state.issueActive === i ? '' : i,
+		 })
+		 console.log(this.state);
+	 }
+
 	render() {
 		return (
 			<Wrapper>
@@ -28,11 +37,14 @@ class ActiveSectionComponent extends Component {
 				<IssueUl>
 					{
 						this.state.issues && this.state.issues.map((issue, i) => (
-							<IssueLi key={i}>
+							<div key={i} onClick={ () => this.toggleExpandIssue(i)}>
+							<IssueLi isActive={this.state.issueActive === i}bg={i % 2 === 0 ? 'white' : 'lightgrey'}>
 								 <SuperSpan width={'40%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.text.substr(0, 30)}...</SuperSpan>
 								 <SuperSpan width={'37%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.address}</SuperSpan>
-								 <SuperSpan  width={'23%'}style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>B00001</SuperSpan>
+								 <SuperSpan  width={'23%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>B00001</SuperSpan>
 						</IssueLi>
+						<ExpandIssueContainer isActive={this.state.issueActive === i} {...issue}></ExpandIssueContainer>
+						</div>
 
 					))
 					}

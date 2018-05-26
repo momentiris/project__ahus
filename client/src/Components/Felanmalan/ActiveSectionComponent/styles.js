@@ -1,31 +1,49 @@
 import styled from 'styled-components';
 import { colors } from '../../../project/stylesheet';
+import React, { Component } from 'react';
 
 export const AsideSort = styled.section`
   min-width: 300px;
   height: 400px;
   background: grey;
   margin-right: 2rem;
-
 `
+const StyledExpandIssueContainer = styled.div`
+  width: 100%;
+  transition: height 200ms ease;
+  overflow: hidden;
+  height: ${props => props.isActive ? '300px' : 0};
+`
+
+export const ExpandIssueContainer = (props) => (
+
+  <StyledExpandIssueContainer isActive={props.isActive}>
+    <section>
+      <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Byggnad: </span>{props.building}</p>
+      <p style={{paddingLeft: '1rem', maxWidth: '70%'}}><span style={{fontFamily: 'OpensansBold'}}>Beskrivning: </span>{props.text}</p>
+      <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Ordernummer: </span>{props._id}</p>
+      <p style={{borderBottom: '.1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Anmält: </span> {new Date(props.added).toLocaleDateString()} <span style={{fontFamily: 'OpensansBold'}}>av</span> {props.sender.name}</p>
+      <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Påbörjad av: </span>{new Date(props.added).toLocaleDateString()}<span style={{fontFamily: 'OpensansBold'}}> av</span> Karl Blom</p>
+      <p style={{borderBottom: '1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Svar: </span>Hej! Vi löser detta, inga problem. Hej svejs! Fridens, Kalle</p>
+
+    </section>
+  </StyledExpandIssueContainer>
+)
+
 export const SuperSpan = styled.span`
 	width: ${props => props.width};
 `
 export const Wrapper = styled.section`
   width: 100%;
   min-width: 500px;
-  padding: 0rem 5rem 5rem 5rem;
-  margin-top: 4rem;
+  padding: 8rem 5rem 5rem 5rem;
   display: flex;
   flex-flow: row nowrap;
   text-align: left;
-
-  overflow-y: scroll;
+  overflow: scroll;
 `
 export const IssueListWrap = styled.section`
   width: 65%;
-  min-height: 100%;
-  border: 1px solid red;
   padding: 1rem;
   min-width: 700px;
 `
@@ -35,10 +53,6 @@ export const IssueUl = styled.ul`
   border-top: 1px solid black;
   padding-top: 1rem;
   overflow-y: scroll;
-  & > li:nth-child(even) {
-    background: ${colors.lightgrey}
-  }
-
 `
 
 export const IssueLi = styled.li`
@@ -48,8 +62,13 @@ export const IssueLi = styled.li`
   list-style-type: none;
   width: 100%;
   padding: 10px 5px 10px 5px;
+  background: ${props => props.bg};
+  cursor: pointer;
   &:before {
-    content: '→'
-
+    transition: .2s ease
+    content: '→';
+    display: block;
+    ${props => props.isActive ? 'transform: rotate(90deg)' : ''};
+    color: ${props => props.isActive ? 'green' : 'black'};
   }
 `
