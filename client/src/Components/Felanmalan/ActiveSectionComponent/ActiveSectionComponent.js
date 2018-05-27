@@ -1,32 +1,59 @@
 import React, { Component } from 'react';
 import { Wrapper, IssueUl, IssueLi, AsideSort, IssueListWrap, SuperSpan, ExpandIssueContainer } from './styles';
+import SortIssuesComponent from '../SortIssuesComponent/SortIssuesComponent';
 
 class ActiveSectionComponent extends Component {
-	 constructor(props) {
-		 super();
+	constructor(props) {
+		super();
 
-		 this.state = {
+		 	this.state = {
 			 issues: [...props.issues],
-		 }
+			 allIssues: [...props.issues]
+		 	}
+	 	}
 
-	 }
-
-	 toggleExpandIssue = async i => {
-
+	toggleExpandIssue = async i => {
 		 await this.setState({
 			 issueActive: this.state.issueActive === i ? '' : i,
 		 })
 		 console.log(this.state);
-	 }
+	}
+
+	sortIssues = async arg => {
+		const sorted = await this.state.issues.sort((a, b) => {
+	    	a = new Date(a.added);
+	    	b = new Date(b.added);
+	    	return arg === 'new' ?
+				(a > b ? -1 : a < b ? 1 : 0) :
+				(a < b ? -1 : a > b ? 1 : 0);
+		});
+
+		await this.setState({
+			issues: sorted,
+		});
+	}
+
+	filterIssuesById = async ({target}) => {
+		const filtered = await this.state.allIssues.filter(issue =>
+			issue.orderId.toString()
+				.includes(target.value) && issue);
+
+		await this.setState({
+			searchInputValue: target.value,
+			issues: [...filtered],
+		});
+
+	}
 
 	render() {
 		return (
 			<Wrapper>
-				<AsideSort>
-				</AsideSort>
+				<SortIssuesComponent searchInputValue={this.state.searchInputValue} sortIssues={this.sortIssues} filterIssuesById={this.filterIssuesById}>
+
+				</SortIssuesComponent>
 				<IssueListWrap>
 					<div style={{marginBottom: '2rem'}}>
-						<h3 style={{fontFamily: 'Chronicle', margin: '0px'}}>Pågående felanmälningar</h3>
+						<h2 style={{fontFamily: 'Chronicle', margin: '0px'}}>Pågående felanmälningar</h2>
 						<p>Här finns all felanmälningar som har <br/>blivit besvarade och åtgärdade på campus.</p>
 					</div>
 				<div style={{width: '100%', display: 'flex', padding: '0rem 22px 0rem 22px'}}>
@@ -41,9 +68,9 @@ class ActiveSectionComponent extends Component {
 							<IssueLi isActive={this.state.issueActive === i}bg={i % 2 === 0 ? 'white' : 'lightgrey'}>
 								 <SuperSpan width={'40%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.text.substr(0, 30)}...</SuperSpan>
 								 <SuperSpan width={'37%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.address}</SuperSpan>
-								 <SuperSpan  width={'23%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>B00001</SuperSpan>
+								 <SuperSpan  width={'23%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.orderId}</SuperSpan>
 						</IssueLi>
-						<ExpandIssueContainer isActive={this.state.issueActive === i} {...issue}></ExpandIssueContainer>
+						<ExpandIssueContainer sortIssues={this.sortIssues} isActive={this.state.issueActive === i} {...issue}></ExpandIssueContainer>
 						</div>
 
 					))

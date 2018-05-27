@@ -20,8 +20,8 @@ class MyMapComponent extends React.Component {
 
     return (
       <GoogleMap
-        defaultZoom={17}
-        defaultCenter={{ lat: 57.6888569, lng: 11.976556099999992 }}
+        defaultZoom={18}
+        defaultCenter={{ lat: 57.6889569, lng: 11.976556099999992 }}
       >
 
       {

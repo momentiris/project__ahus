@@ -2,12 +2,7 @@ import styled from 'styled-components';
 import { colors } from '../../../project/stylesheet';
 import React, { Component } from 'react';
 
-export const AsideSort = styled.section`
-  min-width: 300px;
-  height: 400px;
-  background: grey;
-  margin-right: 2rem;
-`
+
 const StyledExpandIssueContainer = styled.div`
   width: 100%;
   transition: height 200ms ease;
@@ -21,7 +16,7 @@ export const ExpandIssueContainer = (props) => (
     <section>
       <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Byggnad: </span>{props.building}</p>
       <p style={{paddingLeft: '1rem', maxWidth: '70%'}}><span style={{fontFamily: 'OpensansBold'}}>Beskrivning: </span>{props.text}</p>
-      <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Ordernummer: </span>{props._id}</p>
+      <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Ordernummer: </span>{props.orderId}</p>
       <p style={{borderBottom: '.1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Anmält: </span> {new Date(props.added).toLocaleDateString()} <span style={{fontFamily: 'OpensansBold'}}>av</span> {props.sender.name}</p>
       <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Påbörjad av: </span>{new Date(props.added).toLocaleDateString()}<span style={{fontFamily: 'OpensansBold'}}> av</span> Karl Blom</p>
       <p style={{borderBottom: '1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Svar: </span>Hej! Vi löser detta, inga problem. Hej svejs! Fridens, Kalle</p>
@@ -36,7 +31,7 @@ export const SuperSpan = styled.span`
 export const Wrapper = styled.section`
   width: 100%;
   min-width: 500px;
-  padding: 8rem 5rem 5rem 5rem;
+  padding: 6rem 5rem 5rem 5rem;
   display: flex;
   flex-flow: row nowrap;
   text-align: left;
