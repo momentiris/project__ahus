@@ -8,8 +8,10 @@ class ActiveSectionComponent extends Component {
 
 		 	this.state = {
 			 issues: [...props.issues],
-			 allIssues: [...props.issues]
+			 allIssues: [...props.issues],
+			 finishedIssues: props.finishedIssues && [...props.finishedIssues]
 		 	}
+			console.log(this.state);
 	 	}
 
 	toggleExpandIssue = async i => {
@@ -18,6 +20,7 @@ class ActiveSectionComponent extends Component {
 		 })
 		 console.log(this.state);
 	}
+
 
 	sortIssues = async arg => {
 		const sorted = await this.state.issues.sort((a, b) => {
@@ -67,7 +70,7 @@ class ActiveSectionComponent extends Component {
 							<div key={i} onClick={ () => this.toggleExpandIssue(i)}>
 							<IssueLi isActive={this.state.issueActive === i}bg={i % 2 === 0 ? 'white' : 'lightgrey'}>
 								 <SuperSpan width={'40%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.text.substr(0, 30)}...</SuperSpan>
-								 <SuperSpan width={'37%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.address}</SuperSpan>
+								 <SuperSpan width={'37%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.building}</SuperSpan>
 								 <SuperSpan  width={'23%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.orderId}</SuperSpan>
 						</IssueLi>
 						<ExpandIssueContainer sortIssues={this.sortIssues} isActive={this.state.issueActive === i} {...issue}></ExpandIssueContainer>

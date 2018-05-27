@@ -4,8 +4,9 @@ import posed, {PoseGroup} from 'react-pose';
 import {MainCont} from '../Main/styles';
 import { HomeContext } from '../../Contexts/HomeContext';
 import { colors } from '../../project/stylesheet'
+import ReportIssueButton from '../Buttons/ReportIssueButton';
 
-import { AsideIntroBlock, HomeWrapper, SortPostWrap, Logotype, ReportButton, ContactBox } from './styles';
+import { AsideIntroBlock, HomeWrapper, SortPostWrap, Logotype, ContactBox } from './styles';
 import ContentSlider from '../ContentSlider/ContentSlider';
 import FlowSortContainer from '../FlowSort/FlowSortContainer';
 
@@ -21,7 +22,7 @@ class HomeComponent extends Component {
       introBlockActive: false,
       news: [],
       isOpen: false,
-      type: 'all'
+      type: 'all',
     }
   }
 
@@ -68,7 +69,9 @@ class HomeComponent extends Component {
                   color: 'white',
 
                 }}>Välkommen till <br/> Campus Johanneberg</h3>
-              <ReportButton className="reportbutton"color={colors.red}>Rapportera ett fel </ReportButton>
+              <ReportIssueButton text="Rapportera ett fel"path="/ny-felanmalan"onClick={() => {
+                  context.toggleIsScrolled(true)}
+                } className="reportbutton"> </ReportIssueButton>
               <ContactBox color={colors.lightgrey}>
                 <h5>Kontaktperson - Akademiska hus</h5>
                 <p>Jan Henningsson</p>

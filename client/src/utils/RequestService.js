@@ -27,6 +27,21 @@ class RequestService {
             throw error;
         }
     }
+    
+    async getRequestFinished(endpoint) {
+        try {
+            const response = await fetch(endpoint, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Accept': 'application/json'
+                }
+            });
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
 
     async postRequest(endpoint, opts) {
         try {

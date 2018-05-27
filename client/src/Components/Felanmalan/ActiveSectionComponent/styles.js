@@ -15,6 +15,7 @@ export const ExpandIssueContainer = (props) => (
   <StyledExpandIssueContainer isActive={props.isActive}>
     <section>
       <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Byggnad: </span>{props.building}</p>
+      <p style={{paddingLeft: '1rem', maxWidth: '70%'}}><span style={{fontFamily: 'OpensansBold'}}>Titel: </span>{props.title}</p>
       <p style={{paddingLeft: '1rem', maxWidth: '70%'}}><span style={{fontFamily: 'OpensansBold'}}>Beskrivning: </span>{props.text}</p>
       <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Ordernummer: </span>{props.orderId}</p>
       <p style={{borderBottom: '.1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Anmält: </span> {new Date(props.added).toLocaleDateString()} <span style={{fontFamily: 'OpensansBold'}}>av</span> {props.sender.name}</p>

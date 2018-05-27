@@ -36,21 +36,7 @@ export const Logotype = styled.img`
   z-index: 3;
 	transition: .4s ease;
 `
-export const ReportButton = styled.div`
-	margin: 0;
-	display: flex;
-	align-items: center;
-	padding: 0rem 2rem 0rem 2rem;
-	height: 45px;
-	background: ${props => props.color}
-	border-radius: 20px;
-	border: none;
-	font-family: 'OpensansBold';
-	font-size: 16px;
-	color: white;
-	margin-bottom: 3rem;
-	cursor: pointer;
-`
+
 
 export const ContactBox = styled.section`
 	background: ${props => props.color};

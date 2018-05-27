@@ -41,7 +41,7 @@ export const MapnavButton = styled.div`
     border-radius: 0px 0px 15px 15px;
     bottom: 0;
     height: ${props => props.isClicked === props.type ? '0%' : '100%'};
-    transition: height 150ms ease 150ms;
+    transition: height 150ms ease 75ms;
   }
 
 

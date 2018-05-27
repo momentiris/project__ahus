@@ -3,6 +3,7 @@ import { ScrollContainer, Card, Container, ContentWrap, NewsImage,  } from './st
 import { HomeContext } from '../../Contexts/HomeContext';
 import posed, {PoseGroup} from 'react-pose';
 
+
 class ContentSlider extends Component {
 	constructor(props) {
 		super(props);

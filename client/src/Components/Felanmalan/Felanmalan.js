@@ -7,31 +7,40 @@ import { HomeContext } from '../../Contexts/HomeContext';
 class Felanmalan extends Component {
 	constructor(props) {
 		super();
-
-
 		this.state = {
 			hasIssues: false,
 			issues: [],
 			location: props.location,
 			...props.context,
-
+			finishedIssues: [],
 		}
-		console.log(this.state);
 	}
 
-	getAllIssues = async () => {
+	getActiveIssues = async () => {
 		const issues = await RequestService.getRequestByType(`${this.props.serverEndpoint}/issues/Chalmers/Johanneberg`);
 		await this.setState({
 			issues: [...issues],
 			allissues: [...issues],
-			hasIssues: issues.length > 0 && true,
+			hasIssues: issues.length > 0,
 		})
+
 	}
 
-	 componentWillMount() {
-		this.getAllIssues();
+	getFinishedIssues = async () => {
+		const issues = await RequestService.getRequestFinished(`${this.props.serverEndpoint}/issues`);
+		await this.setState({
+			allFinishedIssues: [...issues],
+			finishedIssues: [...issues],
+		})
+		console.log(this.state);
+	}
+
+	 async componentWillMount() {
+		 await this.getFinishedIssues();
+		await this.getActiveIssues();
 		this.state.toggleIsScrolled(true);
 	}
+
 
 	render() {
 		const { hasIssues } = this.state.hasIssues;
@@ -39,7 +48,7 @@ class Felanmalan extends Component {
 			<React.Fragment>
 			{
 				this.state.hasIssues ?
-					<IssueContainer location={this.state.location} issues={this.state.issues}></IssueContainer> :
+					<IssueContainer getFinishedIssues={this.getFinishedIssues} location={this.state.location} issues={this.state.issues} finishedIssues={this.state.finishedIssues}></IssueContainer> :
 						<div>loading...</div>
 			}
 			</React.Fragment>

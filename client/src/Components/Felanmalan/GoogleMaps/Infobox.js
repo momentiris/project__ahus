@@ -3,26 +3,30 @@ import styled from 'styled-components';
 import { colors } from '../../../project/stylesheet';
 
 
-const Pointy = styled.div`
+export const Pointy = styled.div`
 	width: 0;
 	height: 0;
-	border-left: 20px solid white;
+	border-left: 20px solid ${props => props.bg ? props.bg : 'white'};
 	border-right: 20px solid transparent;
 	border-bottom: 20px solid transparent;
 	position: relative;
 	left: 1rem;
 
+
 `
-const CustomInfoBox = styled.div`
-	min-width: 150px;
+export const CustomInfoBox = styled.div`
+
+	min-width: ${props => props.width ? props.width : '150px'};
+	max-width: 300px;
 	display: flex;
 	flex-flow: column nowrap;
-	background: white;
 	padding: 1rem;
 	border-radius: 10px;
 	font-family: 'Chronicle';
-	box-shadow: 3px 3px 5px ${colors.lightgrey};
+	box-shadow:${props => props.noshadow ? '' : `3px 3px 5px ${colors.lightgrey}`} ;
 	margin: 0rem .5rem 0rem 0;
+	background: ${props => props.bg ? props.bg : 'white'};
+
 
 `
 
