@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '../../../project/assets/search.svg';
+import ReportIssueButton from '../../Buttons/ReportIssueButton';
+
 
 const InputField = styled.input`
   border: none;
@@ -19,7 +21,7 @@ const InputField = styled.input`
 `
 const AsideSort = styled.section`
   min-width: 200px;
-  height: 250px;
+
   margin-right: 2rem;
   margin-top: 2rem;
   padding: 1rem;
@@ -39,7 +41,7 @@ const SwitchSpan = styled.span`
 class SortIssuesComponent extends Component {
   constructor(props) {
     super();
-
+    console.log(props);
     this.state = {
       sortActive: 'new',
       ...props,
@@ -50,6 +52,9 @@ class SortIssuesComponent extends Component {
     this.setState({
       sortActive: btn,
     })
+  }
+  test = ({target}) => {
+    console.log(target.value);
   }
   render() {
     return (
@@ -62,19 +67,19 @@ class SortIssuesComponent extends Component {
 
         <SwitchSpan
           type="new"
-          onClick={() => {this.toggleSortButtons('new'), this.state.sortIssues('new') }}
           isActive={this.state.sortActive === 'new'}
           style={{cursor: 'pointer',fontSize: '20px', display: 'inline-block',fontFamily: 'Chronicle', marginBottom: '.5rem'}}>
-          <span style={{ fontSize: '20px', display: 'inline',fontFamily: 'ChronicleLight'}}>från </span> {this.state.sortActive === 'new' ? 'Nyast' : 'Äldst'} →
+          <span className="first"style={{ fontSize: '20px', display: 'inline',fontFamily: 'Chronicle',}}>från </span>  <input data-nr="1" onChange={this.state.sortIssues} type="date" style={{height: '25px', marginLeft: '10px'}}/> →
         </SwitchSpan>
 
         <SwitchSpan
           type="old"
           isActive={this.state.sortActive === 'old'}
-          onClick={() => {this.toggleSortButtons('old'), this.state.sortIssues('old') }}
           style={{cursor: 'pointer',fontSize: '20px', display: 'block',fontFamily: 'Chronicle'}}>
-          <span style={{fontSize: '20px', display: 'inline',fontFamily: 'ChronicleLight'}}>till </span> {this.state.sortActive === 'old' ? 'Nyast' : 'Äldst'} →
+          <span style={{fontSize: '20px', display: 'inline',fontFamily: 'Chronicle'}}>till </span>
+            <input data-nr="2" onChange={ this.state.sortIssues} type="date" style={{height: '25px', marginLeft: '19px'}}/> →
         </SwitchSpan>
+
 
       </div>
         <div style={{backgroundImage: `url(${SearchIcon})`, backgroundRepeat: 'no-repeat', backgroundSize: '20px', backgroundPosition: 'left center'}}>
@@ -82,6 +87,9 @@ class SortIssuesComponent extends Component {
 
           </InputField>
         </div>
+        <div style={{marginTop: '2rem'}}>
+        	<ReportIssueButton path="/ny-felanmalan" text="Rapportera ett fel" />
+          </div>
 
       </AsideSort>
     );

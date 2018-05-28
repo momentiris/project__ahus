@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Wrapper, IssueUl, IssueLi, AsideSort, IssueListWrap, SuperSpan, ExpandIssueContainer } from './styles';
 import SortIssuesComponent from '../SortIssuesComponent/SortIssuesComponent';
 
+
 class ActiveSectionComponent extends Component {
 	constructor(props) {
 		super();
@@ -21,18 +22,39 @@ class ActiveSectionComponent extends Component {
 	}
 
 
-	sortIssues = async arg => {
-		const sorted = await this.state.issues.sort((a, b) => {
-	    	a = new Date(a.added);
-	    	b = new Date(b.added);
-	    	return arg === 'new' ?
-				(a > b ? -1 : a < b ? 1 : 0) :
-				(a < b ? -1 : a > b ? 1 : 0);
-		});
+	sortIssues = async ({target}) => {
+		// const sorted = await this.state.allIssues.sort((a, targetDate) => {
+	  //   	a = new Date(a.added);
+	  //   	targetDate = new Date(target.value);
+		//
+	  //   	return (a < targetDate ? -1 : a > targetDate ? 1 : 0);
+		//
+		// });
+		const chosenDate = new Date(target.value);
+		if (target.dataset.nr == 1) {
+			console.log('first');
+			const test = this.state.allIssues.filter(issue => {
+				const added = new Date(issue.added);
+				return added > chosenDate && issue;
+			})
+			await this.setState({
+				issues: test,
+			});
+		}
+		if (target.dataset.nr == 2) {
+			console.log('last');
+			const test = this.state.issues.filter(issue => {
+				const added = new Date(issue.added);
+				return added < chosenDate && issue;
+			})
+			await this.setState({
+				issues: test,
+			});
+		}
 
-		await this.setState({
-			issues: sorted,
-		});
+
+
+
 	}
 
 	filterIssuesById = async ({target}) => {
@@ -74,7 +96,7 @@ class ActiveSectionComponent extends Component {
 				<div style={{width: '100%', display: 'flex', padding: '0rem 22px 0rem 22px'}}>
 					<SuperSpan width={'41%'} style={{margin: 0, paddingLeft: '10px'}}><h5 style={{margin: 0}}>Beskrivning</h5></SuperSpan>
 					<SuperSpan width={'38%'} style={{margin: 0, paddingLeft: '10px'}}><h5 style={{margin: 0}}>Byggnad</h5></SuperSpan>
-					<SuperSpan width={'19%'} style={{paddingLeft: '10px'}}><h5 style={{margin: 0}}>Ordernummer</h5></SuperSpan>
+					<SuperSpan width={'19%'} style={{paddingLeft: '10px'}}><h5 style={{margin: 0}}>Datum</h5></SuperSpan>
 				</div>
 				<IssueUl>
 					{
@@ -83,7 +105,7 @@ class ActiveSectionComponent extends Component {
 							<IssueLi isActive={this.state.issueActive === i}bg={i % 2 === 0 ? 'white' : 'lightgrey'}>
 								 <SuperSpan width={'40%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.text.substr(0, 30)}...</SuperSpan>
 								 <SuperSpan width={'37%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.building}</SuperSpan>
-								 <SuperSpan  width={'23%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.orderId}</SuperSpan>
+								 <SuperSpan  width={'23%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{new Date(issue.added).toLocaleDateString()}</SuperSpan>
 						</IssueLi>
 
 						<ExpandIssueContainer state={this.state.state} sortIssues={this.sortIssues} isActive={this.state.issueActive === i} {...issue}></ExpandIssueContainer>

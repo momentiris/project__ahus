@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Wrapper, StyledInputBox, InputField, InputLabel, InnerWrap, DisplayInputData, ArrowButton, CustomTextArea } from './styles.js';
+import { Wrapper, StyledInputBox, InputField, InputLabel, InnerWrap, DisplayInputData, ArrowButton, CustomTextArea,
+ Selector} from './styles.js';
 
 class InputBox extends React.Component {
 	constructor(props) {
@@ -21,11 +22,11 @@ class InputBox extends React.Component {
 						<h2 style={{textAlign: 'center '}}>{ text } <span style={{borderBottom: '2px solid black', padding: '0px 1rem 5px 1rem'}}>{underline}</span>
 						</h2>
 						<InputLabel for="building">Byggnad</InputLabel>
-						<select style={{margin: '.5rem 0rem 1rem 0rem'}} name="building" value={issue.building} onChange={ getInputValue }>
+						<Selector name="building"  value={issue.building} onChange={ getInputValue }>
 							<option disabled selected value={issue.building}> -- Välj en byggnad -- </option>
 							<option value="Kårhuset">Kårhuset</option>
 							<option value="Drift & Informationsteknik">Drift & Informationsteknik</option>
-						</select>
+						</Selector>
 						<InputLabel for="roomnumber">Rumsnr</InputLabel>
 						<InputField onChange={ getInputValue } type="text" name="roomnumber" width="50%" placeholder="Välj rumsnummer"></InputField>
 						</React.Fragment>

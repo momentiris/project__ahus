@@ -9,8 +9,17 @@ export const Wrapper = styled.section`
 	justify-content: center;
 	align-items: center;
 `
+export const Selector = styled.select`
+	margin: .5rem 0rem 1rem 0rem;
+	background: white;
 
-
+	font-size: 16px;
+	border: 1px solid #ccc;
+	height: 34px;
+	&:focus {
+		outline-color: #6EC81E;
+	}
+`
 export const ArrowButton = styled.button`
 	width: 50px;
 	height: 50px;
