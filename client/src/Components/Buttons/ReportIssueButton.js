@@ -9,7 +9,7 @@ const Button = styled(Link)`
 	align-items: center;
 	padding: 0rem 2rem 0rem 2rem;
 	height: 45px;
-	background: ${colors.red}
+	background: ${props => props.bg ? props.bg : colors.red};
 	border-radius: 25px;
 	border: none;
 	font-family: 'OpensansBold';
@@ -23,9 +23,9 @@ const Button = styled(Link)`
 
 
 `
-const ReportIssueButton = ({path, text, width}) => {
+const ReportIssueButton = ({path, text, width, bg}) => {
 	return (
-		<Button width={width}to={path}>{text}</Button>
+		<Button bg={bg}width={width}to={path}>{text}</Button>
 	);
 }
 

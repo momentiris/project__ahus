@@ -9,16 +9,15 @@ class ActiveSectionComponent extends Component {
 		 	this.state = {
 			 issues: [...props.issues],
 			 allIssues: [...props.issues],
-			 finishedIssues: props.finishedIssues && [...props.finishedIssues]
+			 finishedIssues: props.finishedIssues && [...props.finishedIssues],
+			 ...props
 		 	}
-			console.log(this.state);
 	 	}
 
 	toggleExpandIssue = async i => {
 		 await this.setState({
 			 issueActive: this.state.issueActive === i ? '' : i,
 		 })
-		 console.log(this.state);
 	}
 
 
@@ -55,10 +54,23 @@ class ActiveSectionComponent extends Component {
 
 				</SortIssuesComponent>
 				<IssueListWrap>
-					<div style={{marginBottom: '2rem'}}>
-						<h2 style={{fontFamily: 'Chronicle', margin: '0px'}}>Pågående felanmälningar</h2>
-						<p>Här finns all felanmälningar som har <br/>blivit besvarade och åtgärdade på campus.</p>
-					</div>
+					{
+						this.state.state === 'active' && (
+							<div style={{marginBottom: '2rem'}}>
+								<h2 style={{fontFamily: 'Chronicle', margin: '0px'}}>Pågående felanmälningar</h2>
+								<p>Här finns alla pågående felanmälningar som har <br/>blivit anmälda på campus.</p>
+							</div>
+						)
+					}
+					{
+						this.state.state === 'finished' && (
+							<div style={{marginBottom: '2rem'}}>
+								<h2 style={{fontFamily: 'Chronicle', margin: '0px'}}>Avslutade felanmälningar</h2>
+								<p>Här finns all felanmälningar som har <br/>blivit besvarade och åtgärdade på campus.</p>
+							</div>
+						)
+					}
+
 				<div style={{width: '100%', display: 'flex', padding: '0rem 22px 0rem 22px'}}>
 					<SuperSpan width={'41%'} style={{margin: 0, paddingLeft: '10px'}}><h5 style={{margin: 0}}>Beskrivning</h5></SuperSpan>
 					<SuperSpan width={'38%'} style={{margin: 0, paddingLeft: '10px'}}><h5 style={{margin: 0}}>Byggnad</h5></SuperSpan>
@@ -73,7 +85,8 @@ class ActiveSectionComponent extends Component {
 								 <SuperSpan width={'37%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.building}</SuperSpan>
 								 <SuperSpan  width={'23%'} style={{fontFamily: 'OpensansReg', paddingLeft: '10px'}}>{issue.orderId}</SuperSpan>
 						</IssueLi>
-						<ExpandIssueContainer sortIssues={this.sortIssues} isActive={this.state.issueActive === i} {...issue}></ExpandIssueContainer>
+
+						<ExpandIssueContainer state={this.state.state} sortIssues={this.sortIssues} isActive={this.state.issueActive === i} {...issue}></ExpandIssueContainer>
 						</div>
 
 					))

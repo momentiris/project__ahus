@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { Wrapper, StyledInputBox, InputField, InputLabel, InnerWrap, DisplayInputData, ArrowButton } from './styles.js';
+import { Wrapper, StyledInputBox, InputField, InputLabel, InnerWrap, DisplayInputData, ArrowButton, SendButton } from './styles.js';
 import { Pointy, CustomInfoBox} from '../GoogleMaps/Infobox';
 import {issueBoxData} from './helpers';
 import ReportIssueButton from '../../Buttons/ReportIssueButton';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import InputBox from './InputBox';
+import { colors } from '../../../project/stylesheet';
+
+
+import RequestService from '../../../utils/RequestService';
 
 class FileIssueWrapper extends Component {
 	constructor(props) {
 		super()
 		this.state = {
-			position: 0,
+			currentPosition: 0,
+			first: true,
+			second: false,
+			third: false,
 			issue: {},
 			...props,
 		}
@@ -19,65 +28,207 @@ class FileIssueWrapper extends Component {
 	}
 
 	pushToIssue = async (input, index) => {
-		this.state.issue[index] = input
+		let issue = Object.assign({}, this.state.issue);    //creating copy of object
+		issue[index] = input;                        //updating value
+		await this.setState({issue});
 		console.log(this.state.issue);
 	}
 
+	checkIfFilledInputs = () => {
+		if (this.state.currentPosition === 0 && this.state.issue.building) {
+			this.setState({
+				firstReady: true,
+			})
+		}
+		if (this.state.currentPosition === 1 && !this.state.issue.text ) return;
+		if (this.state.currentPosition === 1 && this.state.issue.text.toString().length > 2 ) {
+			this.setState({
+				secondReady: true,
+			})
+		} else {
+			this.setState({
+				secondReady: false,
+			})
+		}
+		if ( this.state.currentPosition === 2 &&( this.state.issue.name && this.state.issue.email && this.state.issue.telephone)) {
+			setTimeout(() => this.setState({thirdReady: true}), 500)
+		}
+	}
+
+	sendIssue = async () => {
+		const issue = await this.state.issue;
+		const issueSend = {
+			title: issue.title,
+			text: issue.text,
+			university: 'Chalmers',
+			campus: 'Johanneberg',
+			building: issue.building,
+			status: 'unresolved',
+			lat: 57.68822059999999,
+			lng: 11.978550799999994,
+			address: 'Maskingränd 3',
+			sender: {
+				name: issue.name,
+				email: issue.email,
+				telephone: issue.telephone,
+			},
+		};
+
+		await delete issue.name;
+		await delete issue.email;
+		await delete issue.telephone;
+		console.log(JSON.stringify(issue));
+		const post = await RequestService.postRequest('http://localhost:1337/issues', issueSend);
+		console.log(post);
+
+	}
+
 	getInputValue = async ({target}) => {
-		console.log(target.name);
 		const index = target.name;
 		const input = target.value;
 		await this.pushToIssue(input, index)
+		await this.checkIfFilledInputs();
+	}
 
+	changeView = async arg => {
+		if (this.state.currentPosition === 0 && !this.state.firstReady) return;
+		if (this.state.currentPosition === 1 && !this.state.secondReady) return;
 
-
+		await this.setState({
+			currentPosition: arg === 'forward' ?
+				this.state.currentPosition + 1 :
+				this.state.currentPosition - 1
+		})
 	}
 
 	render() {
 		return (
 			<Wrapper>
+
+				{
+					this.state.currentPosition !== 3 && (
 				<InnerWrap>
-					<div style={{height: '500px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexFlow: 'column'}}>
-					<DisplayInputData bg="#F2F1EA" ></DisplayInputData>
-					<ReportIssueButton width="150px" path="/felanmalan/map" text="Avbryt"></ReportIssueButton>
-					</div>
-					<section style={{display: 'flex', alignItems: 'center', position: 'relative'}}>
-						<span style={{width: '50px'}}></span>
+
+
+					<div style={{minHeight: '500px', height: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexFlow: 'column'}}>
+					<DisplayInputData bg="#F2F1EA">
 						{
-							this.state.position !== 0 && <ArrowButton rotate={true}/>
+							this.state.issue.building && (
+								<span style={{marginBottom: '7px',fontFamily: 'OpensansReg'}}>Byggnad: <br/>
+									<span style={{fontFamily: 'OpensansBold'}}>{this.state.issue.building}
+									</span>
+								</span>
+							)
+						}
+						{
+							this.state.issue.address && (
+								<span style={{marginBottom: '7px',fontFamily: 'OpensansReg'}}>Adress: <br/>
+									<span style={{fontFamily: 'OpensansBold'}}>{this.state.issue.address}
+									</span>
+								</span>
+							)
 						}
 
-				<InputBox issue={this.state.issue} getInputValue={this.getInputValue} text="Välj vilken byggnad du vill" underline="felanmäla">Hej</InputBox>
+						{
+							this.state.issue.roomnumber && (
+								<span style={{marginBottom: '7px',fontFamily: 'OpensansReg'}}>Rumsnr: <br/>
+									<span style={{fontFamily: 'OpensansBold'}}>{this.state.issue.roomnumber}
+									</span>
+								</span>
+							)
+						}
 
-				<ArrowButton ready={this.state.ready} />
+
+					</DisplayInputData>
+					{
+						this.state.currentPosition !== 0 && (
+							<DisplayInputData bg="#F2F1EA" height={'300px'}>
+								{
+									this.state.issue.title && (
+										<React.Fragment>
+										<span style={{display: 'block',fontFamily: 'OpensansReg', marginBottom:'1rem'}}>Sammanfattning: <br/>
+										<span style={{fontFamily: 'OpensansReg', width:'200px'}}>{this.state.issue.title}
+										</span>
+										</span>
+										</React.Fragment>
+									)
+								}
+								{
+									this.state.issue.text && (
+										<React.Fragment>
+										<span style={{display: 'block', paddingBottom: '2rem',fontFamily: 'OpensansReg'}}>Beskrivning: <br/><br/>
+										<span style={{fontFamily: 'OpensansReg', width:'200px'}}>{this.state.issue.text}
+										</span>
+										</span>
+										</React.Fragment>
+									)
+								}
+							</DisplayInputData>
+						)
+					}
+
+					<ReportIssueButton style={{marginTop:'2rem'}}width="150px" path="/felanmalan/map" text="Avbryt"></ReportIssueButton>
+					</div>
+					<section style={{display: 'flex', alignItems: 'center', position: 'relative'}}>
+				{
+					this.state.currentPosition === 0 &&
+					<React.Fragment>
+						<div style={{width: '50px'}}>
+
+						</div>
+					<InputBox pos={this.state.currentPosition} issue={this.state.issue} getInputValue={this.getInputValue} text="Välj vilken byggnad du vill" underline="felanmäla"></InputBox>
+					<ArrowButton onClick={() => this.changeView('forward')} ready={this.state.firstReady} />
+					</React.Fragment>
+				}
+
+				{
+					this.state.currentPosition === 1 &&
+					<React.Fragment>
+						<ArrowButton onClick={() => this.changeView('back')} rotate="true"/>
+						<InputBox pos={this.state.currentPosition} issue={this.state.issue} getInputValue={this.getInputValue} text="" underline="Beskriv felet"></InputBox>
+						<ArrowButton onClick={() => this.changeView('forward')} ready={this.state.secondReady} />
+					</React.Fragment>
+				}
+				{
+					this.state.currentPosition === 2 &&
+					<React.Fragment>
+						<ArrowButton onClick={() => this.changeView('back')} rotate="true"/>
+					<InputBox pos={this.state.currentPosition} issue={this.state.issue} getInputValue={this.getInputValue} text="" underline="Kontaktuppgifter"></InputBox>
+					<div style={{position: 'relative', width: '50px'}}>
+					<SendButton onClick={() => {this.sendIssue(), this.changeView('forward')}} ready={this.state.thirdReady} />
+					</div>
+					</React.Fragment>
+				}
+
+
 			</section>
 				<div style={{padding: '0rem', width: '300px'}}>
 					<CustomInfoBox width="300px"style={{fontFamily: 'Opensansreg'}} bg="#F2F1EA" noshadow={true}>
-						{issueBoxData[this.state.position].infobox}
+						{issueBoxData[this.state.currentPosition].infobox}
 					</CustomInfoBox>
 					<Pointy bg="#F2F1EA" />
 				</div>
 			</InnerWrap>
+		)
+	}
+	{
+		this.state.currentPosition === 3 && (
+			<InnerWrap>
+				<div style={{display: 'flex', flexFlow: 'column nowrap', alignItems: 'center', justifyContent: 'center'}}>
+				<h1 style={{margin: '.5rem'}}>Tack!</h1>
+				<h2 style={{margin: '0 .5rem 1.5rem .5rem'}}>Din anmälan har blivit skickad.</h2>
+				<ReportIssueButton bg={colors.lightgreen} path="/felanmalan/map" text="Stäng"></ReportIssueButton>
+				</div>
+			</InnerWrap>
+		)
+	}
+
 			</Wrapper>
 		);
 	}
 
 }
 
-const InputBox = (props) => (
-	<StyledInputBox>
-		<h2 style={{textAlign: 'center '}}>{props.text} <span style={{borderBottom: '2px solid black', padding: '0px 1rem 5px 1rem'}}>{props.underline}</span>
-		</h2>
-		<InputLabel for="building">Byggnad</InputLabel>
-		<select name="building" value={props.issue.building} onChange={props.getInputValue}>
-		  <option value="Kårhuset">Kårhuset</option>
-		  <option value="Drift & Informationsteknik">Drift & Informationsteknik</option>
-	</select>
-		<InputLabel for="roomnumber">Rumsnr</InputLabel>
-		<InputField onChange={props.getInputValue} type="text" name="roomnumber" width="50%" placeholder="Välj rumsnummer"></InputField>
 
-
-	</StyledInputBox>
-)
 
 export default FileIssueWrapper;

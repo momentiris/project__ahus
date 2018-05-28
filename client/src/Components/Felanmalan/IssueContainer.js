@@ -18,7 +18,7 @@ class IssueContainer extends React.Component {
 			currentIssue: [],
 			btnState: 'map'
 		}
-		console.log(this.state);
+
 
 	}
 
@@ -56,6 +56,9 @@ class IssueContainer extends React.Component {
 						this.state.view === 'map' &&
 						<React.Fragment>
 						<AsideInfoBox currentIssue={this.state.currentIssue} isActive={this.state.asideActive}></AsideInfoBox>
+						<div style={{position: 'absolute', bottom: '15%', zIndex: '100', left: 'calc(2% + 20px)'}}>
+						<ReportIssueButton path="/ny-felanmalan" text="Rapportera ett fel"></ReportIssueButton>
+						</div>
 						<MapComponent
 							issues={this.state.issues}
 							load={this.state.loaded}
@@ -71,13 +74,13 @@ class IssueContainer extends React.Component {
 
 					{
 						this.state.view === 'active' &&
-						<ActiveSectionComponent issues={this.state.issues}>
+						<ActiveSectionComponent state={this.state.view} issues={this.state.issues}>
 						</ActiveSectionComponent>
 					}
 
 					{
 						(this.state.view === 'finished' && this.state.issues) &&
-						<ActiveSectionComponent issues={this.state.finishedIssues} >
+						<ActiveSectionComponent state={this.state.view} issues={this.state.finishedIssues} >
 						</ActiveSectionComponent>
 					}
 

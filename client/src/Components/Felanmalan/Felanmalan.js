@@ -32,7 +32,7 @@ class Felanmalan extends Component {
 			allFinishedIssues: [...issues],
 			finishedIssues: [...issues],
 		})
-		console.log(this.state);
+
 	}
 
 	 async componentWillMount() {

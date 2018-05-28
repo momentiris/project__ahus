@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import { colors } from '../../../project/stylesheet';
 import React, { Component } from 'react';
 
@@ -7,7 +7,7 @@ const StyledExpandIssueContainer = styled.div`
   width: 100%;
   transition: height 200ms ease;
   overflow: hidden;
-  height: ${props => props.isActive ? '300px' : 0};
+  height: ${props => props.isActive ? '425px' : 0};
 `
 
 export const ExpandIssueContainer = (props) => (
@@ -19,8 +19,26 @@ export const ExpandIssueContainer = (props) => (
       <p style={{paddingLeft: '1rem', maxWidth: '70%'}}><span style={{fontFamily: 'OpensansBold'}}>Beskrivning: </span>{props.text}</p>
       <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Ordernummer: </span>{props.orderId}</p>
       <p style={{borderBottom: '.1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Anmält: </span> {new Date(props.added).toLocaleDateString()} <span style={{fontFamily: 'OpensansBold'}}>av</span> {props.sender.name}</p>
-      <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Påbörjad av: </span>{new Date(props.added).toLocaleDateString()}<span style={{fontFamily: 'OpensansBold'}}> av</span> Karl Blom</p>
-      <p style={{borderBottom: '1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Svar: </span>Hej! Vi löser detta, inga problem. Hej svejs! Fridens, Kalle</p>
+      {
+        props.state === 'active' && (
+          <React.Fragment>
+            <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Påbörjad av: </span>{new Date(props.added).toLocaleDateString()}<span style={{fontFamily: 'OpensansBold'}}> av</span> Karl Blom</p>
+            <p style={{borderBottom: '1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Svar: </span>Hej! Vi löser detta, inga problem. Hej svejs! Fridens, Kalle</p>
+          </React.Fragment>
+
+        )
+      }
+      {
+        props.state === 'finished' && (
+          <React.Fragment>
+            <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Påbörjad av: </span>{new Date(props.added).toLocaleDateString()}<span style={{fontFamily: 'OpensansBold'}}> av</span> Karl Blom</p>
+            <p style={{borderBottom: '1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Svar: </span>Hej! Vi löser detta, inga problem. Hej svejs! Fridens, Kalle</p>
+            <p style={{paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Avslutad av: </span>{new Date().toLocaleDateString()}<span style={{fontFamily: 'OpensansBold'}}> av</span> Karl Blom</p>
+            <p style={{borderBottom: '1px solid black', paddingBottom: '1rem',paddingLeft: '1rem'}}><span style={{fontFamily: 'OpensansBold'}}>Svar: </span>Hej! Då var det fixat! Hej svejs! Fridens, Kalle</p>
+          </React.Fragment>
+
+        )
+      }
 
     </section>
   </StyledExpandIssueContainer>
