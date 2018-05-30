@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import posed, {PoseGroup} from 'react-pose';
 import { colors } from '../../project/stylesheet'
 import { tween, easing } from 'popmotion';
-console.log(colors);
-
 
 const containerConfig = {
   enter: {
@@ -49,8 +47,8 @@ export const Container = posed.section(containerConfig);
 
 
 export const Card = styled(Item)`
-  min-width: ${props => props.type == 'news' ? '500px' : '400px'};
-  width: auto;
+  min-width: ${props => props.type == 'news' || props.type == 'event' ? '700px' : '600px'};
+  width: 400px;
   display: inline-flex;
   background: ${props => props.color};
   height: 210px;
@@ -59,31 +57,42 @@ export const Card = styled(Item)`
   justify-content: center;
   margin-right: 1rem;
   margin-bottom: 1rem;
+    white-space: initial
+    font-weight: light;
+    color: ${props => props.type === 'event' ? 'white' : ''};
+  cursor: pointer;
+
 `
 const getColor = type => {
   if (type === 'drift') return colors.yellow;
-  if (type === 'news') return colors.lightgrey;
+  if (type === 'news') return colors.browngrey;
   if (type === 'event') return colors.green;
 }
 
 export const ContentWrap = styled.article`
 	min-width: 60%
-  width: auto;
+  width: 60%;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   align-items: flex-start;
-
+  background-position: 95% 5%;
+  background-repeat: no-repeat;
   height: 100%
-	background: ${props => getColor(props.type)}
+	background-color: ${props => getColor(props.type)}
   border-radius: 15px 0 0 15px;
   padding: 1rem;
+  & > span {
+    font-family: 'OpensansLight';
+  }
+
 `
 
 export const NewsImage = styled.div`
   height: 100%
   width: 40%
   border-radius: 0 15px 15px 0;
-  background: ${colors.lightgrey}
+  background-size: cover;
+  background-position: center;
   padding: 0;
   margin: 0;
 `
@@ -96,9 +105,6 @@ export const ScrollContainer = styled.section`
   padding: 0rem 0rem 1rem 23.25rem;
   display: flex;
   flex-flow: column nowrap;
-
-
-
 
   ::-webkit-scrollbar {
     display: none;

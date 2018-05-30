@@ -4,7 +4,19 @@ import { breakpoints } from '../../../project/styled/helpers'
 
 import { colors } from '../../../project/stylesheet.js';
 
+export const CurrentCampus = styled.span`
+font-family: 'ChronicleLight';
+	font-weight: normal;
+	color: white;
+	position: absolute;
+	color: white;
+	z-index: 100;
+	left: 9rem;
 
+	top: 2%;
+	transition: .3s ease;
+	opacity: ${props => props.active ? 0.8 : 0};
+`
 export const Ul = styled.ul`
   margin: 0 4rem 0 0;
   padding: 0;

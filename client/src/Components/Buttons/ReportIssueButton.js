@@ -15,7 +15,7 @@ const Button = styled(Link)`
 	font-family: 'OpensansBold';
 	font-size: 16px;
 	color: white;
-	margin-bottom: 3rem;
+	margin-bottom: ${props => props.margin ? props.margin : '3rem' };
 	cursor: pointer;
 	text-decoration: none;
 	justify-content: center;
@@ -23,9 +23,9 @@ const Button = styled(Link)`
 
 
 `
-const ReportIssueButton = ({path, text, width, bg}) => {
+const ReportIssueButton = ({path, text, width, bg, margin}) => {
 	return (
-		<Button bg={bg}width={width}to={path}>{text}</Button>
+		<Button margin={margin}bg={bg}width={width}to={path}>{text}</Button>
 	);
 }
 

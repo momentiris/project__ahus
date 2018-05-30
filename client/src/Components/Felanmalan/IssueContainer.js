@@ -5,6 +5,8 @@ import { Section, IssueWrap, MapnavButton} from './styles.js'
 import {colors} from '../../project/stylesheet';
 import ActiveSectionComponent from './ActiveSectionComponent/ActiveSectionComponent';
 import ReportIssueButton from '../Buttons/ReportIssueButton';
+import bytCampusPurple from '../../project/assets/Campuslogo_blue.svg';
+import {SwitchCampusIcon, SwitchCampusInner} from '../Home/styles.js';
 
 class IssueContainer extends React.Component {
 	constructor(props) {
@@ -14,12 +16,10 @@ class IssueContainer extends React.Component {
 			load: false,
 			view: '',
 			...props,
-			asideActive: false,
+			asideActive: true,
 			currentIssue: [],
 			btnState: 'map'
 		}
-
-
 	}
 
 	componentDidMount() {
@@ -69,12 +69,18 @@ class IssueContainer extends React.Component {
 	 					  containerElement={<div style={{ width: `100%`, height: `100%` }} />}
 	 					  mapElement={<div style={{ height: `100%` }} />}
 	 					/>
+					<SwitchCampusIcon color={colors.logoblue} >
+	            <div>
+	            <SwitchCampusInner style={{backgroundImage: `url('${bytCampusPurple}')`}}></SwitchCampusInner></div>
+	            Byt campus
+	          </SwitchCampusIcon>
 					</React.Fragment>
 					}
 
 					{
 						this.state.view === 'active' &&
 						<ActiveSectionComponent state={this.state.view} issues={this.state.issues}>
+
 						</ActiveSectionComponent>
 					}
 

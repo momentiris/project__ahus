@@ -16,7 +16,7 @@ const Button = styled.div`
 
 const SortButton = (props) => (
   <Button name={props.name} onClick={props.sortFeed} color={props.color} className="sort__button" style={{
-      fontFamily: 'OpensansBold',
+      fontFamily: 'OpensansBold', fontWeight: 'normal',
 
     }}> {props.name}</Button>
 )

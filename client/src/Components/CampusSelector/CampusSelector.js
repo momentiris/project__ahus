@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { colors } from '../../project/stylesheet.js'
-import { Wrap, Logotype } from './styles.js';
-
+import { Wrap, Logotype, Button, ListWrap, CitySelectorWrap, CitySpan, ExpandCity, CampusSpan } from './styles.js';
 import posed from 'react-pose';
 import styled from 'styled-components';
-
 import logo from '../Home/logotype/Obs_Aside.svg';
 import {coordinates, campuses} from './fakedata.js';
+import { Link } from 'react-router-dom';
+import { Loader } from '../Loading/loading';
 
-import { Link } from 'react-router-dom'
+
+const cities = ['Alnarp', 'Bohuslän', 'Borås', 'Grythyttan', 'Gävle', 'Göteborg', 'Karlstad', 'Kristianstad', 'Linköping', 'Luleå', 'Lund', 'Malmö', 'Norrköping', 'Skövde', 'Stockholm', 'Umeå', 'Uppsala', 'Örebro'];
+const campusess = ['Chalmers - Campus Johanneberg', 'Göteborgs universitet - Campus medicinareberget', 'Göteborgs universitet - Campus Haga Linné', 'Göteborgs universitet - Renströmsparken och Handelshögskolan']
 
 const SLink = styled(Link)`
 	text-decoration: none;
@@ -20,58 +22,80 @@ const SLink = styled(Link)`
 class CampusSelector extends Component {
 	constructor(props) {
 		super(props);
-		this.geobutton = React.createRef();
-		this.state = {
-			userCoords: {},
-			locations: false,
-		}
-	}
-	async getUserLocation() {
-		await navigator.geolocation.getCurrentPosition(async(res, err) => {
-			if (err) console.log(err);
+		this.loadAnim = React.createRef();
 
-		  this.setState({
-				userCoords: {
-					lat: await res.coords.latitude,
-					lng: await res.coords.longitude,
-				}
-			})
-			this.getCampusLocations()
+		this.state = {
+			listview: false,
+		}
+
+	}
+
+	toggleListView = (e) => {
+		e.preventDefault();
+		this.setState({
+			listview: true,
 		})
 	}
-	async getCampusLocations() {
 
-			const oks = Object.entries(campuses).map(([inst, key]) => key)
-			console.log(oks);
-
-			const ok = Object.entries(campuses).map(([inst, key]) => key)
-			.filter(thing => (thing.lat > this.state.userCoords.lat - .5 &&
-				 thing.lat < this.state.userCoords.lat + .5) &&
-				  (thing.lng > this.state.userCoords.lng -.5 &&
-					 thing.lng < this.state.userCoords.lng + .5));
-
-			await this.setState({
-				locations: ok ? {...ok} : false,
-			})
-			console.log(this.state);
+	toggleLoader = (e) => {
+		e.preventDefault();
+		this.setState({
+			loader: true,
+		})
 	}
 
-	// componentDidMount() {
-		// this.geobutton.current.click();
-	// }
-	// this.state.locations && Object.entries(this.state.locations).map(([key, location]) => {
-	// 	return (
-	// 		<Campus pose={'enter'} key={key}>{location.campus}</Campus>
-	//
-	// 	)
+	expandCampuses = async uni => {
+
+		this.setState({
+			active: uni === 'Göteborg' ? true : false
+		})
+	}
+
 	render() {
 		return (
-			<Wrap innerRef={this.geobutton} color={colors.blue}>
-			<Logotype src={logo} />
-			<h1 style={{fontSize: '40px'}}>Välkommen till obs!</h1>
-			<h1>logo</h1>
-			<SLink to='/hem/?campus=johanneberg'>Chalmers - Campus Johanneberg</SLink>
-			</Wrap>
+			<Wrap className="lottietest"innerRef={this.loadAnim} color={colors.blue}>
+				<Logotype src={logo} />
+			{
+				!this.state.listview && (
+					<React.Fragment>
+					<h2 style={{fontSize: '40px', color: 'white', fontWeight: '300', fontFamily: 'ChronicleLight'}}>Välkommen till obs!</h2>
+					<div style={{width: '200px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2rem'}}>
+						{
+							this.state.loader && (
+								<Loader></Loader>
+
+							)
+						}
+					</div>
+					<div style={{width: '40%', display: 'flex', justifyContent: 'space-around'}}>
+					<Button to="/campus/listvy" onClick={this.toggleListView}>Fel plats?</Button>
+					<Button to="/hem/" onClick={this.toggleLoader}>Hitta min plats</Button>
+					</div>
+					</React.Fragment>
+
+				)
+			}
+
+			{
+				this.state.listview && (
+					<ListWrap>
+						<CitySelectorWrap>
+						{
+							cities.map((city, i) => <CitySpan to="/hem" onClick={() => this.expandCampuses(city)}key={i}>{city}</CitySpan> )
+						}
+						</CitySelectorWrap>
+						<ExpandCity>
+
+								{
+									this.state.active && campusess.map((campus, i) => <CampusSpan to="/hem" key={i} >{campus}</CampusSpan>)
+								}
+
+						</ExpandCity>
+					</ListWrap>
+				)
+			}
+		</Wrap>
+
 		);
 	}
 

@@ -63,6 +63,7 @@ export const SendButton = styled.button`
 	background-image: url(${Arrowsvg});
 	background-repeat: no-repeat;
 	background-position: center;
+
 	${props => props.rotate ? 'transform: rotate(180deg)' : ''};
 	animation: ${props => props.ready ? `${expandSendButton} .3s ease forwards` : ''};
 
@@ -98,7 +99,7 @@ export const DisplayInputData = styled.article`
 	padding: 1rem;
 	align-self: start;
 	flex-direction: column;
-	margin-right: 2rem;
+
 	margin-bottom: 1rem;
 	overflow-y: scroll;
 `

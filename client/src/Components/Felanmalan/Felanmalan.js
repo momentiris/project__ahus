@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import IssueContainer from './IssueContainer';
 import RequestService from '../../utils/RequestService';
-
+import { Loader } from '../Loading/loading';
 import { HomeContext } from '../../Contexts/HomeContext';
 
 class Felanmalan extends Component {
@@ -49,7 +49,7 @@ class Felanmalan extends Component {
 			{
 				this.state.hasIssues ?
 					<IssueContainer getFinishedIssues={this.getFinishedIssues} location={this.state.location} issues={this.state.issues} finishedIssues={this.state.finishedIssues}></IssueContainer> :
-						<div>loading...</div>
+						<div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><Loader></Loader></div>
 			}
 			</React.Fragment>
 		)

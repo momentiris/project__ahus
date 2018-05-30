@@ -8,7 +8,6 @@ class InputBox extends React.Component {
 		this.state = {
 			...props,
 		}
-		console.log(this.state);
 	}
 
 	render() {
@@ -39,10 +38,10 @@ class InputBox extends React.Component {
 					<h2 style={{textAlign: 'center '}}>{ text } <span style={{borderBottom: '2px solid black', padding: '0px 1rem 5px 1rem'}}>{underline}</span>
 					</h2>
 					<InputLabel for="title">Rubrik:</InputLabel>
-					<InputField onChange={ getInputValue } type="text" value={this.state.issue.title} name="title" width="100%" placeholder="Rubrik"></InputField>
+					<InputField onChange={ getInputValue } type="text"  name="title" width="100%" placeholder="Rubrik"></InputField>
 
 					<InputLabel for="text">Beskrivning*</InputLabel>
-					<CustomTextArea placeholder="Skriv..."value={this.state.issue.text}  onChange={ getInputValue } name="text" id="text" cols="30" rows="10"></CustomTextArea>
+					<CustomTextArea placeholder="Skriv..." onChange={ getInputValue } name="text" id="text" cols="30" rows="10"></CustomTextArea>
 
 					</React.Fragment>
 

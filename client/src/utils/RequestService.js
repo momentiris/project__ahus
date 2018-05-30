@@ -27,7 +27,7 @@ class RequestService {
             throw error;
         }
     }
-    
+
     async getRequestFinished(endpoint) {
         try {
             const response = await fetch(endpoint, {

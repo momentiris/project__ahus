@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Wrapper, IssueUl, IssueLi, AsideSort, IssueListWrap, SuperSpan, ExpandIssueContainer } from './styles';
 import SortIssuesComponent from '../SortIssuesComponent/SortIssuesComponent';
-
+import {SwitchCampusIcon, SwitchCampusInner} from '../../Home/styles.js';
+import bytCampusPurple from '../../../project/assets/Campuslogo_blue.svg';
+import {colors} from '../../../project/stylesheet';
 
 class ActiveSectionComponent extends Component {
 	constructor(props) {
@@ -76,6 +78,11 @@ class ActiveSectionComponent extends Component {
 
 				</SortIssuesComponent>
 				<IssueListWrap>
+					<SwitchCampusIcon color={colors.logoblue} >
+							<div>
+							<SwitchCampusInner style={{backgroundImage: `url('${bytCampusPurple}')`}}></SwitchCampusInner></div>
+							Byt campus
+						</SwitchCampusIcon>
 					{
 						this.state.state === 'active' && (
 							<div style={{marginBottom: '2rem'}}>

@@ -97,4 +97,6 @@ export const colors = {
   red: '#D12D4E',
   blue: '#0094BB',
   lightgreen: '#6EC81E',
+  browngrey: '#F2F1EA',
+  logoblue: '#0094BB',
 };

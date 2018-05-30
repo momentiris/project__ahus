@@ -10,23 +10,22 @@ const Wrap = styled.div`
   display: flex;
   align-items: center;
   flex-flow: row nowrap;
+  margin-bottom: 1rem;
 `
 
 class FlowSortContainer extends Component {
   constructor(props) {
     super();
-    console.log(props);
-
   }
 
 
   render() {
     return (
       <Wrap>
-        <h4>Sortera Nyhetsflöde:</h4>
+        <p>Sortera Nyhetsflöde:</p>
         <SortButton sortFeed={() => this.props.sortFeed('all')} name="Visa Alla" color={colors.purple} />
         <SortButton sortFeed={() => this.props.sortFeed('drift')} name="Driftinfo" color={colors.yellow} />
-        <SortButton sortFeed={() => this.props.sortFeed('news')} name="Nyheter" color={colors.lightgrey} />
+        <SortButton sortFeed={() => this.props.sortFeed('news')} name="Nyheter" color={colors.browngrey} />
         <SortButton sortFeed={() => this.props.sortFeed('event')} name="EventKalendern" color={colors.green} />
       </Wrap>
     );

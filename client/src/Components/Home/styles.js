@@ -7,6 +7,39 @@ export const HomeWrapper = styled.section`
 	overflow-x: hidden;
 
 `
+
+export const SwitchCampusIcon = styled.div`
+width: 100px;
+height: 110px;
+position: absolute;
+z-index: 100;
+bottom: ${props => props.bottom ? props.bottom : '4.5%'};
+right: ${props => props.right ? props.right : '5%'};
+font-family: 'OpensansBold';
+display: flex;
+justify-content: space-around;
+flex-flow: column nowrap;
+align-items: center;
+color: ${props => props.color ? props.color : 'black'};
+
+`
+export const SwitchCampusInner = styled.div`
+width: 75px;
+height: 75px;
+border-radius: 50%;
+background-position: center;
+background-size: contain;
+background-repeat: no-repeat;
+box-shadow: 0px 2px 5px 0px grey;
+cursor: pointer;
+transition: all .1s cubic-bezier(.34,.57,.54,1.18);
+&:hover {
+  transform: scale(0.95);
+	box-shadow: 0px 1px 3px 0px grey;
+}
+
+`
+
 export const AsideIntroBlock = styled.section`
 	height: 100vh;
 	width: 20%
@@ -21,11 +54,13 @@ export const AsideIntroBlock = styled.section`
 	align-items: center;
 	justify-content: flex-end;
 	flex-flow: column nowrap;
-	& > h3 {
+	& > h2 {
 		font-weight: 600;
 		letter-spacing: 1.5px;
-		margin-bottom: 15rem;
-		margin-right: 4.5rem;
+		margin-bottom: 13rem;
+
+		font-family: 'Chronicle';
+		font-weight: 300;
 	}
 `
 

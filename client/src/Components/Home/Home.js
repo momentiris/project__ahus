@@ -5,15 +5,13 @@ import {MainCont} from '../Main/styles';
 import { HomeContext } from '../../Contexts/HomeContext';
 import { colors } from '../../project/stylesheet'
 import ReportIssueButton from '../Buttons/ReportIssueButton';
-
-import { AsideIntroBlock, HomeWrapper, SortPostWrap, Logotype, ContactBox } from './styles';
+import bytCampusPurple from '../../project/assets/Campuslogo_blue.svg';
+import { AsideIntroBlock, HomeWrapper, SortPostWrap, Logotype, ContactBox,SwitchCampusIcon, SwitchCampusInner } from './styles';
 import ContentSlider from '../ContentSlider/ContentSlider';
 import FlowSortContainer from '../FlowSort/FlowSortContainer';
-
 import RequestService from '../../utils/RequestService';
 import logo from './logotype/Obs_Aside.svg';
-
-import { Loader } from '../Loading/loading'
+import { Loader } from '../Loading/loading';
 
 class HomeComponent extends Component {
   constructor(props) {
@@ -65,10 +63,9 @@ class HomeComponent extends Component {
             className="aside__introblock"
             color={'grey'}
             isBlockActive={context.state.isScrolled}>
-              <h3 style={{
+              <h2 style={{
                   color: 'white',
-
-                }}>Välkommen till <br/> Campus Johanneberg</h3>
+                }}>Välkommen till <br/> Campus Johanneberg</h2>
               <ReportIssueButton text="Rapportera ett fel"path="/ny-felanmalan"onClick={() => {
                   context.toggleIsScrolled(true)}
                 } className="reportbutton"> </ReportIssueButton>
@@ -98,8 +95,13 @@ class HomeComponent extends Component {
               isBlockActive={this.state.introBlockActive}
               news={this.state.news}>
             </ContentSlider>
-          ) : <Loader></Loader>
+          ) : <div style={{width: '100%', height: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><Loader></Loader></div>
           }
+          <SwitchCampusIcon color={colors.logoblue}>
+            <div>
+            <SwitchCampusInner style={{backgroundImage: `url('${bytCampusPurple}')`}}></SwitchCampusInner></div>
+            Byt campus
+          </SwitchCampusIcon>
         </HomeWrapper>
       )}
     </HomeContext.Consumer>

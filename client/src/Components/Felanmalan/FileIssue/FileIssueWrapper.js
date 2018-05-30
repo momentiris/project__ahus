@@ -31,7 +31,7 @@ class FileIssueWrapper extends Component {
 		let issue = Object.assign({}, this.state.issue);    //creating copy of object
 		issue[index] = input;                        //updating value
 		await this.setState({issue});
-		console.log(this.state.issue);
+
 	}
 
 	checkIfFilledInputs = () => {
@@ -66,7 +66,7 @@ class FileIssueWrapper extends Component {
 			status: 'unresolved',
 			lat: 57.68822059999999,
 			lng: 11.978550799999994,
-			address: 'Maskingränd 3',
+			address: 'Quarl Ankas Väg 3',
 			sender: {
 				name: issue.name,
 				email: issue.email,
@@ -77,7 +77,7 @@ class FileIssueWrapper extends Component {
 		await delete issue.name;
 		await delete issue.email;
 		await delete issue.telephone;
-		console.log(JSON.stringify(issue));
+
 		const post = await RequestService.postRequest('http://localhost:1337/issues', issueSend);
 		console.log(post);
 
@@ -104,40 +104,41 @@ class FileIssueWrapper extends Component {
 	render() {
 		return (
 			<Wrapper>
-
 				{
 					this.state.currentPosition !== 3 && (
 				<InnerWrap>
-
-
-					<div style={{minHeight: '500px', height: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexFlow: 'column'}}>
+					<div style={{minHeight: '500px', height: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexFlow: 'column', paddingRight: '2rem'}}>
 					<DisplayInputData bg="#F2F1EA">
 						{
 							this.state.issue.building && (
-								<span style={{marginBottom: '7px',fontFamily: 'OpensansReg'}}>Byggnad: <br/>
-									<span style={{fontFamily: 'OpensansBold'}}>{this.state.issue.building}
-									</span>
+								<React.Fragment>
+								<span style={{fontFamily: 'OpensansBold'}}>Byggnad: <br/>
 								</span>
+								<span style={{fontFamily: 'OpensansReg', marginBottom: '10px'}}>{this.state.issue.building}
+								</span>
+								</React.Fragment>
 							)
 						}
 						{
 							this.state.issue.address && (
+								<React.Fragment>
 								<span style={{marginBottom: '7px',fontFamily: 'OpensansReg'}}>Adress: <br/>
-									<span style={{fontFamily: 'OpensansBold'}}>{this.state.issue.address}
-									</span>
 								</span>
+								<span style={{fontFamily: 'OpensansBold'}}>{this.state.issue.address}
+								</span>
+							</React.Fragment>
 							)
 						}
-
 						{
 							this.state.issue.roomnumber && (
-								<span style={{marginBottom: '7px',fontFamily: 'OpensansReg'}}>Rumsnr: <br/>
-									<span style={{fontFamily: 'OpensansBold'}}>{this.state.issue.roomnumber}
+								<React.Fragment>
+									<span style={{fontFamily: 'OpensansBold'}}>Rumsnr: <br/>
 									</span>
-								</span>
+									<span style={{fontFamily: 'OpensansReg'}}>{this.state.issue.roomnumber}
+									</span>
+								</React.Fragment>
 							)
 						}
-
 
 					</DisplayInputData>
 					{
@@ -146,9 +147,9 @@ class FileIssueWrapper extends Component {
 								{
 									this.state.issue.title && (
 										<React.Fragment>
-										<span style={{display: 'block',fontFamily: 'OpensansReg', marginBottom:'1rem'}}>Sammanfattning: <br/>
-										<span style={{fontFamily: 'OpensansReg', width:'200px'}}>{this.state.issue.title}
+										<span style={{display: 'block',fontFamily: 'OpensansBold'}}>Rubrik: <br/>
 										</span>
+										<span style={{fontFamily: 'OpensansReg', width:'200px', marginBottom: '10px'}}>{this.state.issue.title}
 										</span>
 										</React.Fragment>
 									)
@@ -156,9 +157,9 @@ class FileIssueWrapper extends Component {
 								{
 									this.state.issue.text && (
 										<React.Fragment>
-										<span style={{display: 'block', paddingBottom: '2rem',fontFamily: 'OpensansReg'}}>Beskrivning: <br/><br/>
-										<span style={{fontFamily: 'OpensansReg', width:'200px'}}>{this.state.issue.text}
+										<span style={{display: 'block',fontFamily: 'OpensansBold'}}>Beskrivning: <br/>
 										</span>
+										<span style={{fontFamily: 'OpensansReg', width:'200px'}}>{this.state.issue.text}
 										</span>
 										</React.Fragment>
 									)
@@ -167,7 +168,7 @@ class FileIssueWrapper extends Component {
 						)
 					}
 
-					<ReportIssueButton style={{marginTop:'2rem'}}width="150px" path="/felanmalan/map" text="Avbryt"></ReportIssueButton>
+					<ReportIssueButton margin="0"style={{marginTop:'2rem'}}width="150px" path="/felanmalan/map" text="Avbryt"></ReportIssueButton>
 					</div>
 					<section style={{display: 'flex', alignItems: 'center', position: 'relative'}}>
 				{
@@ -184,7 +185,7 @@ class FileIssueWrapper extends Component {
 				{
 					this.state.currentPosition === 1 &&
 					<React.Fragment>
-						<ArrowButton onClick={() => this.changeView('back')} rotate="true"/>
+						<ArrowButton onClick={() => this.changeView('back')} rotate="true" ready="true"/>
 						<InputBox pos={this.state.currentPosition} issue={this.state.issue} getInputValue={this.getInputValue} text="" underline="Beskriv felet"></InputBox>
 						<ArrowButton onClick={() => this.changeView('forward')} ready={this.state.secondReady} />
 					</React.Fragment>
@@ -192,9 +193,9 @@ class FileIssueWrapper extends Component {
 				{
 					this.state.currentPosition === 2 &&
 					<React.Fragment>
-						<ArrowButton onClick={() => this.changeView('back')} rotate="true"/>
+						<ArrowButton onClick={() => this.changeView('back')} ready="true" rotate="true"/>
 					<InputBox pos={this.state.currentPosition} issue={this.state.issue} getInputValue={this.getInputValue} text="" underline="Kontaktuppgifter"></InputBox>
-					<div style={{position: 'relative', width: '50px'}}>
+					<div style={{position: 'relative', width: '50px', display: 'flex', height: '100%', alignItems: 'center'}}>
 					<SendButton onClick={() => {this.sendIssue(), this.changeView('forward')}} ready={this.state.thirdReady} />
 					</div>
 					</React.Fragment>

@@ -20,6 +20,7 @@ const Main = ({location}, props) => (
                       {(context) => (
                       <Switch location={location}>
                         <Route exact path={'/'} component={CampusSelector}/>
+
                         <Route path={'/hem'} render={props => <HomeComponent serverEndpoint={'http://localhost:1337'} />} />
                         <Route path={'/felanmalan'} render={props => <Felanmalan context={context} location={location} serverEndpoint={'http://localhost:1337'} />}/>
                         <Route exact path={'/ny-felanmalan'} render={props => <FileIssueWrapper context={context} />}/>

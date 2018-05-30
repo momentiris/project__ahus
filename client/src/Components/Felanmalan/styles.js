@@ -28,7 +28,7 @@ export const MapnavButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: color 150ms ease 150ms;
+  transition: color 150ms ease 50ms;
   color: ${props => props.isClicked === props.type ? 'white' : colors.red};
 	z-index: 100;
   margin-right: .5rem;

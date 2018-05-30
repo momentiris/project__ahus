@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router'
-import { Ul, Li, SLink, Nav, Underscore } from './styles.js';
+import { Ul, Li, SLink, Nav, Underscore, CurrentCampus } from './styles.js';
 import { colors } from '../../../project/stylesheet.js'
 import { HomeContext } from '../../../Contexts/HomeContext';
 import logo from './logotype/Obs_Aside.svg';
@@ -59,6 +59,9 @@ class HeaderComponent extends Component {
 
     }
   }
+  test = (context) => {
+      console.log(context);
+  }
 
   render() {
     const { match, location, history } = this.props;
@@ -70,6 +73,7 @@ class HeaderComponent extends Component {
 
           <header className="header">
             <Logotype src={logo} className="logotype" isBlockActive={context.state.isScrolled} />
+            <CurrentCampus active={context.state.isScrolled} onClick={() => this.test(context)}>Chalmers <br/>Campus Johanneberg</CurrentCampus>
             <Nav color={location.pathname === '/hem' ? colors.purple : colors.red} className="navigation">
 
               <Ul>
